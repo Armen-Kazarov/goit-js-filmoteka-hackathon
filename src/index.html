@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Filmoteka-team-3</title>
-  </head>
-  <body>
-    <header class="header"></header>
-    <main class="main"></main>
-    <footer class="footer"></footer>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Filmoteka-team-3</title>
+</head>
+
+<body>
+  <header class="header"></header>
+  <main class="main">
+    <section class="library container">
+      <div id="myLibraryButtons" class="library-btn-box">
+        <button type="button" data-target="watched" class="library-btn-item">
+          Watched
+        </button>
+        <button type="button" data-target="queue" class="library-btn-item">
+          Queue
+        </button>
+      </div>
+      <ul class="library-list flex-container">
+        <!-- <li class="library-list-item">
+          <img class="library-list-item-img" src="./images/Logo.jpg" alt="some movie">
+          <p class="library-list-item-rating">6.5</p>
+          <p class="library-list-item-title"> Marvell </p>
+        </li> -->
+      </ul>
+    </section>
+  </main>
+  <footer class="footer"></footer>
+</body>
+
 </html>
