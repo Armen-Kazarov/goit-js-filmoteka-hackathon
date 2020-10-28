@@ -1,4 +1,4 @@
-import './sass/main.scss;
+import './sass/main.scss';
 import 'material-design-icons/iconfont/material-icons.css';
 import '@fortawesome/fontawesome-free';
 import './js/1initialHomePage';
