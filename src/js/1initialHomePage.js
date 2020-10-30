@@ -49,7 +49,3 @@ const fetchGenres = () => {
 fetchPopularMoviesList();
 
 fetchGenres();
-
-fetch(`https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`)
-  .then(res => res.json())
-  .then(data => console.log(data));
