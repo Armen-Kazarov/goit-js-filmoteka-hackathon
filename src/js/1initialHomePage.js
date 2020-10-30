@@ -25,7 +25,7 @@ const fetchPopularMoviesList = (page = 1) => {
     .then(res => res.json())
     .then(data => {
       data.results.forEach(element => {
-        createCardFunc(element.poster_path, element.title, element.id);
+        createCardFunc(element.backdrop_path, element.title, element.id);
       });
     })
     .catch(error => console.log(error));
