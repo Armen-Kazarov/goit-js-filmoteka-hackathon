@@ -1,6 +1,7 @@
 import filmsListTpl from '../templates/films-list-tpl.hbs';
 
 const filmsListRef = document.querySelector('.js-films-list');
+const filmItemRef = document.querySelector('.js-film-item');
 
 let renderFilms;
 let genres;
@@ -16,8 +17,9 @@ const createCardFunc = (imgPath, filmTitle, movieId) => {
     },
   ];
   filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(renderFilms));
-  // activeDetailsPage(movieId, false);
 };
+
+filmItemRef.addEventListener('click', activeDetailsPage(movieId, false));
 
 const fetchPopularMoviesList = (page = 1) => {
   const urlForPopularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ru-RU&page=${page}`;
