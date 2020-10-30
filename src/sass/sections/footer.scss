@@ -6,17 +6,17 @@
   min-height: 86px;
   width: 100%;
   position: fixed;
-  left: 0; bottom: 0;
+  left: 0;
+  bottom: 0;
   background: #77c1bb;
   justify-content: center;
   align-items: center;
   letter-spacing: 0px;
   color: #372c48;
   font: $second-font;
+  z-index: 1;
 }
 .back_to_top {
-
-  // position: sticky;
   position: fixed;
   bottom: 15px;
   right: 15px;
@@ -24,16 +24,15 @@
   width: 50px;
   height: 50px;
   text-align: center;
-  box-shadow:(0 0 3.5px rgba(0,0,0,0.55));
-  background-color: transparent;;
+  box-shadow: (0 0 3.5px rgba(0, 0, 0, 0.55));
+  background-color: transparent;
   cursor: pointer;
   border-radius: 50%;
   display: none;
   font-size: 28px;
   line-height: 50px;
   color: #ffffff;
-  font-family: "Font Awesome";
-
+  font-family: 'Font Awesome';
 }
 
 .back_to_top:hover {
