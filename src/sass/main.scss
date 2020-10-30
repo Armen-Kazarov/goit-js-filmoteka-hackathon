@@ -1,9 +1,9 @@
 @import 'normalize.scss';
 @import 'reset.scss';
-@import "~@fortawesome/fontawesome-free";
-@import "~@fortawesome/fontawesome-free/css/fontawesome.min.css";
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
-@import "~@fortawesome/fontawesome-free/css/svg-with-js.min.css";
+@import '~@fortawesome/fontawesome-free';
+@import '~@fortawesome/fontawesome-free/css/fontawesome.min.css';
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import '~@fortawesome/fontawesome-free/css/svg-with-js.min.css';
 @import './helpers/fonts.scss';
 @import './helpers/variables.scss';
 @import 'base.scss';
@@ -11,3 +11,4 @@
 @import './sections/header.scss';
 @import './sections/form.scss';
 @import './sections/footer.scss';
+@import './sections/homePage.scss';
