@@ -33,4 +33,4 @@ function createDOMElements() {
   mainRef.append(myLibrary);
 }
 
-createDOMElements()
+// createDOMElements()
