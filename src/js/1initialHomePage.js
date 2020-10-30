@@ -6,17 +6,17 @@ let renderFilms;
 let genres;
 let pageNumber = 1;
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
-const urlForGenres = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
 
 const createCardFunc = (imgPath, filmTitle, movieId) => {
-  const arrayFilm = [
+  renderFilms = [
     {
       backdrop_path: imgPath,
       title: filmTitle,
       id: movieId,
     },
   ];
-  filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(arrayFilm));
+  filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(renderFilms));
+  // activeDetailsPage(movieId, false);
 };
 
 const fetchPopularMoviesList = (page = 1) => {
@@ -31,8 +31,6 @@ const fetchPopularMoviesList = (page = 1) => {
     .catch(error => console.log(error));
 };
 
-fetchPopularMoviesList();
-
 const fetchGenres = () => {
   const urlForGenres = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US&results=20`;
   fetch(urlForGenres)
@@ -42,3 +40,7 @@ const fetchGenres = () => {
     })
     .catch(error => console.log(error));
 };
+
+fetchPopularMoviesList();
+
+fetchGenres();
