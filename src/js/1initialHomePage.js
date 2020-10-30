@@ -24,8 +24,6 @@ const createCardFunc = (imgPath, filmTitle, movieId) => {
   filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(renderFilms));
 };
 
-// filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
-
 const fetchPopularMoviesList = (page = 1) => {
   const urlForPopularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ru-RU&page=${page}`;
   fetch(urlForPopularMovies)
@@ -56,3 +54,5 @@ const fetchGenres = () => {
 fetchPopularMoviesList();
 
 fetchGenres();
+
+// filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
