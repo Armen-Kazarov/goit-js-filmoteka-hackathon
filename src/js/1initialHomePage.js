@@ -20,12 +20,17 @@ const createCardFunc = (imgPath, filmTitle, movieId) => {
 };
 
 const fetchPopularMoviesList = (page = 1) => {
-  const urlForPopularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`;
+  const urlForPopularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ru-RU&page=${page}`;
   fetch(urlForPopularMovies)
     .then(res => res.json())
     .then(data => {
       data.results.forEach(element => {
-        createCardFunc(element.backdrop_path, element.title, element.id);
+        const date1 = new Date(`${element.release_date} 00:00:00`);
+        createCardFunc(
+          element.backdrop_path,
+          `${element.title} (${date1.getFullYear()})`,
+          element.id,
+        );
       });
     })
     .catch(error => console.log(error));
@@ -44,3 +49,7 @@ const fetchGenres = () => {
 fetchPopularMoviesList();
 
 fetchGenres();
+
+fetch(`https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`)
+  .then(res => res.json())
+  .then(data => console.log(data));

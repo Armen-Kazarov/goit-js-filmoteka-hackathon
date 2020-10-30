@@ -1,7 +1,11 @@
 {{#each this}}
 <li class="film-item">
-    <img src="https://image.tmdb.org/t/p/w500{{backdrop_path}}" alt="poster">
-    <p>'{{title}}'</p>
-    <span>{{id}}</span>
+    <img class="film-item__poster" src="https://image.tmdb.org/t/p/w500{{backdrop_path}}" alt="poster">
+    <p class="film-item__title">{{title}}</p>
 </li>
 {{/each}}
+
+{{!-- english_name: "Russian"
+iso_639_1: "ru"
+name: "Pусский"
+__proto__: Object --}}
