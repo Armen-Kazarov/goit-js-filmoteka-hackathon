@@ -4,7 +4,7 @@ const searchWrapperRef = document.querySelector('.search-wrapper');
 
 const libraryListRef = document.querySelector('.main-content');
 
-function createLibraryElements() {
+function createLibraryBtnElements() {
   const formaRef = document.querySelector('.search-film');
   formaRef.classList.add('js-none');
 
@@ -75,4 +75,4 @@ const drawWatchedFilmList = () => {
   }
 };
 
-export { createLibraryElements, drawQueueFilmList, drawWatchedFilmList };
+export {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList };
