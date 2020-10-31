@@ -1,4 +1,4 @@
-function createDOMElements() {
+export default function createLibraryElements () {
   const mainRef = document.querySelector('.main');
 
   const myLibrary = document.createElement('section');
@@ -31,6 +31,6 @@ function createDOMElements() {
   myLibrary.append(btnWrapper, libraryList);
 
   mainRef.append(myLibrary);
-}
+};
 
-//createDOMElements()
+// createLibraryElements();

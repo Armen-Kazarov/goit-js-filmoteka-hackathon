@@ -1,10 +1,13 @@
+'use strict'
 import filmsListTpl from '../templates/films-list-tpl.hbs';
 
 const mainSectionRef = document.querySelector('main');
-mainSectionRef.insertAdjacentHTML(
-  'beforeend',
-  '<ul class="films-list js-films-list flex-container container">',
-);
+
+// mainSectionRef.insertAdjacentHTML(
+//   'beforeend',
+//   '<ul class="films-list js-films-list flex-container container">',
+// );
+// mainSectionRef
 
 const filmsListRef = document.querySelector('.js-films-list');
 
@@ -13,7 +16,7 @@ let genres;
 let pageNumber = 1;
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
 
-const createCardFunc = (imgPath, filmTitle, movieId) => {
+ function createCardFunc (imgPath, filmTitle, movieId) {
   renderFilms = [
     {
       backdrop_path: imgPath,
@@ -51,8 +54,23 @@ const fetchGenres = () => {
     .catch(error => console.log(error));
 };
 
-fetchPopularMoviesList();
+
+
+// fetchPopularMoviesList();
 
 fetchGenres();
 
+
 // filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
+export {
+  mainSectionRef,
+  filmsListRef,
+  renderFilms,
+  genres,
+  pageNumber,
+  apiKey,
+  createCardFunc,
+  fetchPopularMoviesList,
+  fetchGenres,
+};
+
