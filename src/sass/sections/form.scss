@@ -45,6 +45,17 @@
   }
 }
 
+.no-results {
+  text-align: center;
+}
+
+.pagination.is-hidden {
+  display: none;
+}
+
+.is-hidden {
+  visibility: hidden;
+}
 .pagination {
   width: 270px;
   margin: 0 auto;
@@ -57,9 +68,9 @@
     height: 48px;
     border-radius: 5px;
     background-image: linear-gradient(
-        0deg,
-        #efefef 0%,
-        rgba(239, 239, 239, 0) 100%
+      0deg,
+      #efefef 0%,
+      rgba(239, 239, 239, 0) 100%
     );
     border: 1px solid #dddddd;
     font-size: 22px;
@@ -72,10 +83,15 @@
 
   &__element_button {
     width: 95px;
+    cursor: pointer;
   }
 
   &__element_current-page {
     width: 48px;
+  }
+
+  &__element_current-page::placeholder {
+    text-align: center;
   }
 }
 
