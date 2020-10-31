@@ -1,6 +1,6 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
 
-const createDOMElements=() =>{
+const createLibraryElements = () => {
   const mainRef = document.querySelector('.main');
 
   const myLibrary = document.createElement('section');
@@ -16,13 +16,13 @@ const createDOMElements=() =>{
   const btnWatched = document.createElement('button');
   btnWatched.type = 'button';
   btnWatched.dataset.target = 'watched';
-  btnWatched.classList = 'library__btn__item';
+  btnWatched.classList = 'library__btn__item js-btnWatched';
   btnWatched.textContent = 'Watched';
 
   const btnQueue = document.createElement('button');
   btnQueue.type = 'button';
   btnQueue.dataset.target = 'queue';
-  btnQueue.classList = 'library__btn__item';
+  btnQueue.classList = 'library__btn__item js-btnQueue';
   btnQueue.textContent = 'Queue';
 
   const libraryList = document.createElement('ul');
@@ -34,12 +34,9 @@ const createDOMElements=() =>{
 
   mainRef.classList.toggle('container', false);
   mainRef.append(myLibrary);
-}
-
-createDOMElements();
+};
 
 const libraryListRef = document.querySelector('.library__list');
-
 const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   renderFilms = [
     {
@@ -60,7 +57,7 @@ const drawQueueFilmList = () => {
   let queueLibraryArr;
   const localStorageData = JSON.parse(localStorage.getItem('filmsQueue'));
   if (localStorageData.length !== 0 && localStorageData !== null) {
-    queueLibraryArr = localStorageData.map(createLibraryCardFunc);
+    queueLibraryArr = localStorageData.map(data => createLibraryCardFunc(data));
     libraryListRef.innerHTML = '';
     libraryListRef.append(...queueLibraryArr);
   } else {
@@ -69,15 +66,17 @@ const drawQueueFilmList = () => {
   }
 };
 
-const drawWatchedFilmList = ()=> {
+const drawWatchedFilmList = () => {
   let watchedLibraryArr;
   const localStorageData = JSON.parse(localStorage.getItem('filmsWatched'));
   if (localStorageData.length !== 0 && localStorageData !== null) {
-    watchedLibraryArr = localStorageData.map(createLibraryCardFunc);
+    watchedLibraryArr = localStorageData.map(data =>
+      createLibraryCardFunc(data),
+    );
     libraryListRef.innerHTML = '';
     libraryListRef.append(...watchedLibraryArr);
   } else {
     libraryListRef.innerHTML =
       '<p class="content__warning__message">You do not have watched movies. Add them.</p>';
   }
-}
+};

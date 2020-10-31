@@ -1,3 +1,4 @@
+'use strict';
 import filmsListTpl from '../templates/films-list-tpl.hbs';
 
 const mainSectionRef = document.querySelector('main');
@@ -50,9 +51,8 @@ const fetchGenres = () => {
     })
     .catch(error => console.log(error));
 };
+// fetchPopularMoviesList();
 
-fetchPopularMoviesList();
-
-fetchGenres();
+// fetchGenres();
 
 // filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
