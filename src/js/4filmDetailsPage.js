@@ -1,5 +1,9 @@
 import detailsFilms from '../templates/detailsPage.hbs';
 
+const refs = {
+  detailsPage: document.querySelector('#root-details-page'),
+};
+
 const monitorButtonStatusText = () => {
   if (
     localStorage.getItem(
@@ -84,10 +88,4 @@ const showDetails = selectFilm => {
   monitorButtonStatusText();
 };
 
-export {
-  showDetails,
-  drawQueueFilmList,
-  drawWatchedFilmList,
-  buttonWatched,
-  buttonQueue,
-};
+export { showDetails, drawQueueFilmList, drawWatchedFilmList };
