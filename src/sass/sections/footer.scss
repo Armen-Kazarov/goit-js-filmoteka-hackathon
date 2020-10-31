@@ -3,6 +3,7 @@
 }
 
 .footer {
+  z-index: 1;
   min-height: 86px;
   width: 100%;
   position: fixed;
@@ -21,7 +22,7 @@
   position: fixed;
   bottom: 15px;
   right: 15px;
-  z-index: 9999;
+  z-index: 1;
   width: 50px;
   height: 50px;
   text-align: center;
