@@ -1,10 +1,15 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
 
-const createLibraryElements = () => {
-  const btnWrapperRef = document.querySelector('.search-wrapper');
+const searchWrapperRef = document.querySelector('.search-wrapper');
 
-  const serchFormRef = document.querySelector('.search-film');
-  serchFormRef.classList('none');
+const libraryListRef = document.querySelector('.main-content');
+
+function createLibraryElements() {
+  const formaRef = document.querySelector('.search-film');
+  formaRef.classList.add('js-none');
+
+  const btnWrapper = document.createElement('div');
+  btnWrapper.classList = 'library__btn__wrapper';
 
   const btnBox = document.createElement('div');
   btnBox.classList = 'library__btn__box';
@@ -12,22 +17,20 @@ const createLibraryElements = () => {
   const btnWatched = document.createElement('button');
   btnWatched.type = 'button';
   btnWatched.dataset.target = 'watched';
-  btnWatched.classList = 'library__btn__box__item js-btnWatched';
+  btnWatched.classList = 'library__btn__item js-btnWatched';
   btnWatched.textContent = 'Watched';
 
   const btnQueue = document.createElement('button');
   btnQueue.type = 'button';
   btnQueue.dataset.target = 'queue';
-  btnQueue.classList = 'library__btn__box__item js-btnQueue';
+  btnQueue.classList = 'library__btn__item js-btnQueue';
   btnQueue.textContent = 'Queue';
 
   btnBox.append(btnWatched, btnQueue);
+  btnWrapper.append(btnBox);
+  searchWrapperRef.append(btnWrapper);
+}
 
-  btnWrapperRef.append(btnBox);
-};
-createLibraryElements;
-
-const libraryListRef = document.querySelector('.main-content');
 const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   renderFilms = [
     {
@@ -71,3 +74,5 @@ const drawWatchedFilmList = () => {
       '<li class="content__warning__message">You do not have watched movies. Add them.</li>';
   }
 };
+
+export { createLibraryElements, drawQueueFilmList, drawWatchedFilmList };
