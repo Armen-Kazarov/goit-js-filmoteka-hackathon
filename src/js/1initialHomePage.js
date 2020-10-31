@@ -51,6 +51,7 @@ const fetchGenres = () => {
     })
     .catch(error => console.log(error));
 };
+// fetchPopularMoviesList();
 
 fetchPopularMoviesList(pageNamberObj.pageNumber);
 
@@ -68,4 +69,3 @@ export {
   fetchPopularMoviesList,
   fetchGenres,
 };
-

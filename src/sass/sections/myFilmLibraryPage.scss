@@ -1,4 +1,4 @@
-.library__list {
+.js-films-list {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -89,9 +89,11 @@
     }
   }
 }
-
+.js-none{
+  display: none;
+}
 @media (min-width: 768px) {
-  .library__list {
+  .js-films-list {
     flex-direction: row;
     flex-wrap: wrap;
     &__item {
@@ -124,7 +126,7 @@
       }
     }
   }
-  .library__list {
+  .js-films-list {
     &__item {
       max-width: 470px;
       &__img {

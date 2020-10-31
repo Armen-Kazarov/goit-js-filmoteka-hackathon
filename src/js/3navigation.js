@@ -70,5 +70,4 @@ const selectFilms =
   const goTopBtn = document.querySelector('.back_to_top');
   goTopBtn.addEventListener('click', backToTop);
   window.addEventListener('scroll', trackScroll);
-
 })();
