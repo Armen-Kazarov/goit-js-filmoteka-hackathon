@@ -1,16 +1,15 @@
 import filmsListTpl from '../templates/films-list-tpl.hbs';
 
-const mainSectionRef = document.querySelector('main');
-mainSectionRef.insertAdjacentHTML(
-  'beforeend',
-  '<ul class="films-list js-films-list flex-container container">',
-);
-
 const filmsListRef = document.querySelector('.js-films-list');
 
-let renderFilms;
+filmsListRef.classList.add('films-list');
+filmsListRef.classList.add('flex-container');
+
+let renderFilms = [];
 let genres;
-let pageNumber = 1;
+const pageNamberObj = {
+  pageNumber: 2,
+};
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
 
 const createCardFunc = (imgPath, filmTitle, movieId) => {
@@ -29,6 +28,7 @@ const fetchPopularMoviesList = (page = 1) => {
   fetch(urlForPopularMovies)
     .then(res => res.json())
     .then(data => {
+      console.log(data);
       data.results.forEach(element => {
         const date1 = new Date(`${element.release_date} 00:00:00`);
         createCardFunc(
@@ -51,20 +51,20 @@ const fetchGenres = () => {
     .catch(error => console.log(error));
 };
 
-fetchPopularMoviesList();
+fetchPopularMoviesList(pageNamberObj.pageNumber);
 
 fetchGenres();
 
 // filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
 
 export {
-  mainSectionRef,
   filmsListRef,
   renderFilms,
   genres,
-  pageNumber,
+  pageNamberObj,
   apiKey,
   createCardFunc,
   fetchPopularMoviesList,
   fetchGenres,
 };
+
