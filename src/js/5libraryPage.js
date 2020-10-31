@@ -1,3 +1,5 @@
+import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
+
 function createDOMElements() {
   const mainRef = document.querySelector('.main');
 
@@ -30,7 +32,36 @@ function createDOMElements() {
   btnWrapper.append(btnBox);
   myLibrary.append(btnWrapper, libraryList);
 
+  mainRef.classList.toggle('container', false);
   mainRef.append(myLibrary);
 }
 
-//createDOMElements()
+createDOMElements();
+
+const libraryListRef = document.querySelector('.library__list');
+
+const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
+  renderFilms = [
+    {
+      poster_path: imgPath,
+      title: filmTitle,
+      id: movieId,
+      evaluation: voteAverage,
+    },
+  ];
+  libraryListRef
+    .innerHTML(itemsLibraryTemplate(renderFilms))
+    .addEventListener('click', event =>
+      event.target(activeDetailsPage(movieId, true)),
+    );
+};
+
+const drawQueueFilmList = () => {
+  let itemLibraryArr;
+  const localStorageData = JSON.parse(localStorage.getItem('filmsQueue'));
+  if (localStorageData.length !== 0 && localStorageData !== null) {
+    itemLibraryArr = localStorageData.map(createLibraryCardFunc);
+    libraryListRef.innerHTML = ""
+    libraryListRef.append(...itemLibraryArr)
+  } else {}
+};
