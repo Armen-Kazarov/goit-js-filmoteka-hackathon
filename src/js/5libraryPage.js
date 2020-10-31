@@ -1,6 +1,6 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
 
-function createDOMElements() {
+const createDOMElements=() =>{
   const mainRef = document.querySelector('.main');
 
   const myLibrary = document.createElement('section');
@@ -57,11 +57,27 @@ const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
 };
 
 const drawQueueFilmList = () => {
-  let itemLibraryArr;
+  let queueLibraryArr;
   const localStorageData = JSON.parse(localStorage.getItem('filmsQueue'));
   if (localStorageData.length !== 0 && localStorageData !== null) {
-    itemLibraryArr = localStorageData.map(createLibraryCardFunc);
-    libraryListRef.innerHTML = ""
-    libraryListRef.append(...itemLibraryArr)
-  } else {}
+    queueLibraryArr = localStorageData.map(createLibraryCardFunc);
+    libraryListRef.innerHTML = '';
+    libraryListRef.append(...queueLibraryArr);
+  } else {
+    libraryListRef.innerHTML =
+      '<p class="content__warning__message">You do not have to queue movies to watch. Add them.</p>';
+  }
 };
+
+const drawWatchedFilmList = ()=> {
+  let watchedLibraryArr;
+  const localStorageData = JSON.parse(localStorage.getItem('filmsWatched'));
+  if (localStorageData.length !== 0 && localStorageData !== null) {
+    watchedLibraryArr = localStorageData.map(createLibraryCardFunc);
+    libraryListRef.innerHTML = '';
+    libraryListRef.append(...watchedLibraryArr);
+  } else {
+    libraryListRef.innerHTML =
+      '<p class="content__warning__message">You do not have watched movies. Add them.</p>';
+  }
+}
