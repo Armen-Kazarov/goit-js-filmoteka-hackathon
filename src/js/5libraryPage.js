@@ -1,42 +1,33 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
 
 const createLibraryElements = () => {
-  const mainRef = document.querySelector('.main');
+  const btnWrapperRef = document.querySelector('.search-wrapper');
 
-  const myLibrary = document.createElement('section');
-  myLibrary.classList = 'library';
-
-  const btnWrapper = document.createElement('div');
-  btnWrapper.classList = 'library__btn__wrapper';
+  const serchFormRef = document.querySelector('.search-film');
+  serchFormRef.classList('none');
 
   const btnBox = document.createElement('div');
-  btnBox.id = 'myLibraryButtons';
   btnBox.classList = 'library__btn__box';
 
   const btnWatched = document.createElement('button');
   btnWatched.type = 'button';
   btnWatched.dataset.target = 'watched';
-  btnWatched.classList = 'library__btn__item js-btnWatched';
+  btnWatched.classList = 'library__btn__box__item js-btnWatched';
   btnWatched.textContent = 'Watched';
 
   const btnQueue = document.createElement('button');
   btnQueue.type = 'button';
   btnQueue.dataset.target = 'queue';
-  btnQueue.classList = 'library__btn__item js-btnQueue';
+  btnQueue.classList = 'library__btn__box__item js-btnQueue';
   btnQueue.textContent = 'Queue';
 
-  const libraryList = document.createElement('ul');
-  libraryList.classList = 'library__list flex-container container';
-
   btnBox.append(btnWatched, btnQueue);
-  btnWrapper.append(btnBox);
-  myLibrary.append(btnWrapper, libraryList);
 
-  mainRef.classList.toggle('container', false);
-  mainRef.append(myLibrary);
+  btnWrapperRef.append(btnBox);
 };
+createLibraryElements;
 
-const libraryListRef = document.querySelector('.library__list');
+const libraryListRef = document.querySelector('.main-content');
 const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   renderFilms = [
     {
@@ -62,7 +53,7 @@ const drawQueueFilmList = () => {
     libraryListRef.append(...queueLibraryArr);
   } else {
     libraryListRef.innerHTML =
-      '<p class="content__warning__message">You do not have to queue movies to watch. Add them.</p>';
+      '<li class="content__warning__message">You do not have to queue movies to watch. Add them.</li>';
   }
 };
 
@@ -77,6 +68,6 @@ const drawWatchedFilmList = () => {
     libraryListRef.append(...watchedLibraryArr);
   } else {
     libraryListRef.innerHTML =
-      '<p class="content__warning__message">You do not have watched movies. Add them.</p>';
+      '<li class="content__warning__message">You do not have watched movies. Add them.</li>';
   }
 };
