@@ -1,4 +1,9 @@
 import detailsFilms from '../templates/detailsPage.hbs';
+import { selectedFilm } from './3navigation';
+
+const refs = {
+  detailsPage: document.querySelector('#root-details-page'),
+};
 
 const monitorButtonStatusText = () => {
   if (
@@ -75,19 +80,12 @@ const drawWatchedFilmList = () => {
 };
 
 const showDetails = selectFilm => {
-  const temp = detailsFilms(getDetails);
+  const temp = detailsFilms(selectFilm);
   refs.detailsPage.innerHTML = temp;
-
   const buttonWatched = document.querySelector('.details__button-watched');
   const buttonQueue = document.querySelector('.details__button-queue');
 
   monitorButtonStatusText();
 };
 
-export {
-  showDetails,
-  drawQueueFilmList,
-  drawWatchedFilmList,
-  buttonWatched,
-  buttonQueue,
-};
+export { showDetails, drawQueueFilmList, drawWatchedFilmList };
