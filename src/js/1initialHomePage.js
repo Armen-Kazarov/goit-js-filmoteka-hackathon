@@ -56,3 +56,15 @@ fetchPopularMoviesList();
 fetchGenres();
 
 // filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
+
+export {
+  mainSectionRef,
+  filmsListRef,
+  renderFilms,
+  genres,
+  pageNumber,
+  apiKey,
+  createCardFunc,
+  fetchPopularMoviesList,
+  fetchGenres,
+};
