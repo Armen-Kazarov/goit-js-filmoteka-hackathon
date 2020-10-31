@@ -9,7 +9,7 @@ filmsListRef.classList.add('flex-container');
 let renderFilms = [];
 let genres;
 const pageNamberObj = {
-  pageNumber: 2,
+  pageNumber: 1,
 };
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
 

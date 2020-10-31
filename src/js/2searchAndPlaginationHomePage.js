@@ -1,18 +1,18 @@
 import filmsSearchTpl from '../templates/film-searchl.hbs';
-// import {
+import {
 //   mainSectionRef,
 //   filmsListRef,
 //   renderFilms,
 //   genres,
-//   pageNumber,
-//   apiKey,
+     pageNamberObj,
+     apiKey,
 //   createCardFunc,
 //   fetchPopularMoviesList,
 //   fetchGenres,
-// } from './1initialHomePage.js';
-const apiKey = 'fa9fa54083c479003851c965e04509d5';
+} from './1initialHomePage.js'
+//const apiKey = 'fa9fa54083c479003851c965e04509d5';
 let inputValue = '';
-let pageNumber = 1;
+//let pageNumber = 1;
 let totalPages = 0;
 
 const searchFormRef = document.querySelector('.search-film');
@@ -21,7 +21,7 @@ const btnPrevPageRef = document.querySelector('.btn-prev');
 const btnNextPageRef = document.querySelector('.btn-next');
 const currentPageRef = document.querySelector('.current-page');
 const paginationRef = document.querySelector('.pagination');
-const filmListRef = document.querySelector('.main-content');
+const filmListRef = document.querySelector('.js-films-list');
 const formPageInputRef = document.querySelector('.page-input');
 
 // const searchWrapperRef = document.querySelector('.search-wrapper');
@@ -30,13 +30,13 @@ const formPageInputRef = document.querySelector('.page-input');
 // searchWrapperRef.insertAdjacentHTML('beforeend', markup);
 
 function fetchFilms() {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNumber}&api_key=${apiKey}`;
+  const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNamberObj.pageNumber}&api_key=${apiKey}`;
   console.log(url);
   return fetch(url)
     .then(res => res.json())
     .then(data => {
       totalPages = data.total_pages;
-      currentPageRef.setAttribute('placeholder', pageNumber);
+      currentPageRef.setAttribute('placeholder', pageNamberObj.pageNumber);
       return data;
     })
     .catch('Произошла ошибка');
@@ -54,7 +54,7 @@ const serviceData = data => {
 searchFormRef.addEventListener('submit', event => {
   event.preventDefault();
   inputValue = searchInputRef.value;
-  pageNumber = 1;
+  pageNamberObj.pageNumber = 1;
   filmListRef.innerHTML = '';
   if (inputValue) {
     fetchFilms().then(data => {
@@ -74,7 +74,7 @@ searchFormRef.addEventListener('submit', event => {
 });
 
 btnNextPageRef.addEventListener('click', () => {
-  pageNumber += 1;
+  pageNamberObj.pageNumber += 1;
   fetchFilms().then(data => {
     serviceData(data);
     // renderMarkup(data);
@@ -82,7 +82,7 @@ btnNextPageRef.addEventListener('click', () => {
 });
 
 btnPrevPageRef.addEventListener('click', () => {
-  pageNumber -= 1;
+  pageNamberObj.pageNumber -= 1;
   fetchFilms().then(data => {
     serviceData(data);
     // renderMarkup(data);
@@ -95,8 +95,8 @@ formPageInputRef.addEventListener('submit', event => {
   event.preventDefault();
   const inputPageNumber = Math.abs(parseInt(currentPageRef.value));
   inputPageNumber <= totalPages
-    ? (pageNumber = inputPageNumber)
-    : (pageNumber = totalPages);
+    ? (pageNamberObj.pageNumber = inputPageNumber)
+    : (pageNamberObj.pageNumber = totalPages);
   currentPageRef.value = '';
 
   fetchFilms().then(data => {
