@@ -4,7 +4,7 @@ import {
 //   filmsListRef,
 //   renderFilms,
 //   genres,
-     pageNamberObj,
+     pageNumberObj,
      apiKey,
 //   createCardFunc,
 //   fetchPopularMoviesList,
@@ -30,13 +30,13 @@ const formPageInputRef = document.querySelector('.page-input');
 // searchWrapperRef.insertAdjacentHTML('beforeend', markup);
 
 function fetchFilms() {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNamberObj.pageNumber}&api_key=${apiKey}`;
+  const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNumberObj.pageNumber}&api_key=${apiKey}`;
   console.log(url);
   return fetch(url)
     .then(res => res.json())
     .then(data => {
       totalPages = data.total_pages;
-      currentPageRef.setAttribute('placeholder', pageNamberObj.pageNumber);
+      currentPageRef.setAttribute('placeholder', pageNumberObj.pageNumber);
       return data;
     })
     .catch('Произошла ошибка');
@@ -54,7 +54,7 @@ const serviceData = data => {
 searchFormRef.addEventListener('submit', event => {
   event.preventDefault();
   inputValue = searchInputRef.value;
-  pageNamberObj.pageNumber = 1;
+  pageNumberObj.pageNumber = 1;
   filmListRef.innerHTML = '';
   if (inputValue) {
     fetchFilms().then(data => {
@@ -62,7 +62,7 @@ searchFormRef.addEventListener('submit', event => {
       if (data.total_pages > 1) {
         serviceData(data);
       } else {
-        let markup = `<h2 class='no-results'>По вашеме запросу ничего не найдено!</h2>`;
+        let markup = `<h2 class='no-results'>По вашему запросу ничего не найдено!</h2>`;
         filmListRef.insertAdjacentHTML('beforeend', markup);
         paginationRef.classList.add('is-hidden');
       }
@@ -74,7 +74,7 @@ searchFormRef.addEventListener('submit', event => {
 });
 
 btnNextPageRef.addEventListener('click', () => {
-  pageNamberObj.pageNumber += 1;
+  pageNumberObj.pageNumber += 1;
   fetchFilms().then(data => {
     serviceData(data);
     // renderMarkup(data);
@@ -82,7 +82,7 @@ btnNextPageRef.addEventListener('click', () => {
 });
 
 btnPrevPageRef.addEventListener('click', () => {
-  pageNamberObj.pageNumber -= 1;
+  pageNumberObj.pageNumber -= 1;
   fetchFilms().then(data => {
     serviceData(data);
     // renderMarkup(data);
@@ -95,8 +95,8 @@ formPageInputRef.addEventListener('submit', event => {
   event.preventDefault();
   const inputPageNumber = Math.abs(parseInt(currentPageRef.value));
   inputPageNumber <= totalPages
-    ? (pageNamberObj.pageNumber = inputPageNumber)
-    : (pageNamberObj.pageNumber = totalPages);
+    ? (pageNumberObj.pageNumber = inputPageNumber)
+    : (pageNumberObj.pageNumber = totalPages);
   currentPageRef.value = '';
 
   fetchFilms().then(data => {
