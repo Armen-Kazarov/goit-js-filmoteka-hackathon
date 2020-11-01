@@ -1,5 +1,5 @@
-import {fetchPopularMoviesList} from './1initialHomePage.js';
-import {showDetails, drawQueueFilmList} from './4filmDetailsPage';
+import { fetchPopularMoviesList } from './1initialHomePage.js';
+import { showDetails, drawQueueFilmList } from './4filmDetailsPage';
 import createLibraryElements from './5libraryPage.js';
 
 let selectFilm;
@@ -13,41 +13,38 @@ home.addEventListener('click', activeHomePage);
 const hederName = document.querySelector('.logo');
 hederName.addEventListener('click', activeHomePage);
 
-function activeHomePage () {
+function activeHomePage() {
   exChange.innerHTML = '';
-  fetchPopularMoviesList()
+  fetchPopularMoviesList();
   //.addEventListener('click', кнопки пагинации);
   //.addEventListener('click', кнопки пагинации);
-};
+}
 
 const library = document.querySelector('.library-button');
 library.addEventListener('click', activeLibraryPage);
 
-function activeLibraryPage () {
+function activeLibraryPage() {
   exChange.innerHTML = '';
   createLibraryElements();
   drawQueueFilmList();
   const buttonQueue = document.querySelector('.js-btnQueue');
   const buttonWatched = document.querySelector('.js-btnWatched');
   buttonQueue.setAttribute('active', true);
-  buttonQueue.addEventListener('click', )
-  buttonWatched.addEventListener('click', )
-};
+  buttonQueue.addEventListener('click');
+  buttonWatched.addEventListener('click');
+}
 
-function activeDetailsPage (movieId) {
-  exChange.classList.add("hideAllLi");
+function activeDetailsPage(movieId) {
+  exChange.classList.add('hideAllLi');
   showDetails(selectFilm);
   mainRef.insertAdjacentHTML('beforeend', showDetails);
   const detailsQueue = document.querySelector('.details__queue');
   const detailsWatched = document.querySelector('.details__watched');
-  detailsQueue.addEventListener('click', )
-  detailsWatched.addEventListener('click', )
-};
+  detailsQueue.addEventListener('click');
+  detailsWatched.addEventListener('click');
+}
 
-
-
-const selectFilms =
-(function () {
+const selectFilms = (function () {
   const trackScroll = () => {
     let scrolled = window.pageYOffset;
     let coords = document.documentElement.clientHeight;
@@ -70,5 +67,6 @@ const selectFilms =
   const goTopBtn = document.querySelector('.back_to_top');
   goTopBtn.addEventListener('click', backToTop);
   window.addEventListener('scroll', trackScroll);
-
 })();
+
+export { selectFilm };
