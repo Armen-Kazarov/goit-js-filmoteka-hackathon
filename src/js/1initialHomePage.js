@@ -8,8 +8,8 @@ filmsListRef.classList.add('flex-container');
 
 let renderFilms = [];
 let genres;
-const pageNamberObj = {
-  pageNumber: 2,
+const pageNumberObj = {
+  pageNumber: 1,
 };
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
 
@@ -29,7 +29,7 @@ const fetchPopularMoviesList = (page = 1) => {
   fetch(urlForPopularMovies)
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      // console.log(data);
       data.results.forEach(element => {
         const date1 = new Date(`${element.release_date} 00:00:00`);
         createCardFunc(
@@ -53,19 +53,20 @@ const fetchGenres = () => {
 };
 // fetchPopularMoviesList();
 
-fetchPopularMoviesList(pageNamberObj.pageNumber);
+fetchPopularMoviesList(pageNumberObj.pageNumber);
 
 fetchGenres();
 
 
 // filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
+
 export {
   filmsListRef,
   renderFilms,
   genres,
-  pageNamberObj,
+  pageNumberObj,
   apiKey,
   createCardFunc,
   fetchPopularMoviesList,
-  fetchGenres,
+  fetchGenres
 };

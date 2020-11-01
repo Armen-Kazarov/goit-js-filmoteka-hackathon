@@ -1,8 +1,8 @@
-import {fetchPopularMoviesList} from './1initialHomePage.js';
+import {filmsListRef, renderFilms, genres, pageNamberObj, apiKey, createCardFunc, fetchPopularMoviesList, fetchGenres} from './1initialHomePage.js';
 import {showDetails} from './4filmDetailsPage';
 import {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList} from './5libraryPage.js';
 
-let selectFilm;
+// let selectFilm;
 
 const exChange = document.querySelector('.js-films-list');
 
@@ -38,19 +38,42 @@ function activeLibraryPage() {
   const buttonQueue = document.querySelector('.js-btnQueue');
   const buttonWatched = document.querySelector('.js-btnWatched');
   buttonQueue.setAttribute('active', true);
-  buttonQueue.addEventListener('click');
-  buttonWatched.addEventListener('click');
+  // buttonQueue.addEventListener('click');
+  // buttonWatched.addEventListener('click');
 }
 
-function activeDetailsPage(movieId) {
-  exChange.classList.add('hideAllLi');
-  showDetails(selectFilm);
-  mainRef.insertAdjacentHTML('beforeend', showDetails);
-  const detailsQueue = document.querySelector('.details__queue');
-  const detailsWatched = document.querySelector('.details__watched');
-  detailsQueue.addEventListener('click');
-  detailsWatched.addEventListener('click');
-}
+// exChange.addEventListener('click', activeDetailsPage);
+filmsListRef.addEventListener('click', activeDetailsPage);
+// filmsListRef.addEventListener('click', activeDetailsPage);
+function activeDetailsPage(event) {
+  event.preventDefault();
+  if (event.target.nodeName !== "LI") {
+    return;
+  };
+
+  let selectFilm = event;
+  let movieId = event.target.getAttribute('id');
+  console.log(movieId);
+
+  exChange.innerHTML = '';
+  // showDetails(selectFilm);
+};
+
+
+// function activeDetailsPage(movieId, bool) {
+
+  // exChange.classList.add('hideAllLi');
+  // mainRef.insertAdjacentHTML('beforeend', showDetails);
+
+  // const detailsQueue = document.querySelector('.details__queue');
+  // const detailsWatched = document.querySelector('.details__watched');
+  // const detailsQueue = document.querySelector('.film-item');
+  // const detailsWatched = document.querySelector('.details__watched');
+
+  // detailsQueue.addEventListener('click', fetchGenres());
+  // detailsWatched.addEventListener('click', showDetails(selectFilm));
+// };
+
 
 const selectFilms = (function () {
   const trackScroll = () => {
