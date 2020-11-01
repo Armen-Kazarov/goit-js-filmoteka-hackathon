@@ -81,7 +81,7 @@ const drawWatchedFilmList = () => {
 
 const showDetails = selectFilm => {
   const temp = detailsFilms(selectFilm);
-  refs.detailsPage.innerHTML = temp;
+  refs.detailsFilms.innerHTML = temp;
   // const buttonWatched = document.querySelector('.details__button-watched');
   // const buttonQueue = document.querySelector('.details__button-queue');
 

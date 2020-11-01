@@ -11,7 +11,7 @@ const mainRef = document.querySelector('.main');
 const formaRef = document.querySelector('.search-film');
 
 const libraryBtnRef = document.querySelector('.library__btn__wrapper');
-
+const libraryBtnItemRef = document.querySelector('.js-btnQueue');
 const home = document.querySelector('.home-button');
 home.addEventListener('click', activeHomePage);
 
@@ -35,6 +35,7 @@ function activeLibraryPage() {
   formaRef.classList.add('js-display__none');
   libraryBtnRef.classList.remove('js-display__none');
   drawQueueFilmList();
+  libraryBtnItemRef.classList.add('btn__active');
   const buttonQueue = document.querySelector('.js-btnQueue');
   const buttonWatched = document.querySelector('.js-btnWatched');
   buttonQueue.setAttribute('active', true);
@@ -47,16 +48,25 @@ filmsListRef.addEventListener('click', activeDetailsPage);
 // filmsListRef.addEventListener('click', activeDetailsPage);
 function activeDetailsPage(event) {
   event.preventDefault();
+  exChange.innerHTML = '';
   if (event.target.nodeName !== "LI") {
     return;
   };
 
-  let selectFilm = event;
-  let movieId = event.target.getAttribute('id');
-  console.log(movieId);
-
-  exChange.innerHTML = '';
-  // showDetails(selectFilm);
+  let selectFilm;
+  const fetchSelectFilm = () => {
+    let movieId = event.target.getAttribute('id');
+    console.log(movieId);
+    const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+    fetch(urlForSelectFilm)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        return data.articles;
+      })
+      .catch(error => console.log(error));
+    };
+     // showDetails(selectFilm);
 };
 
 
