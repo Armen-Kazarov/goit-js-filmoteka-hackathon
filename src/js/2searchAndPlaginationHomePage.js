@@ -1,28 +1,22 @@
-// import filmsSearchTpl from '../templates/film-searchl.hbs';
-// import filmsListTpl from '../templates/films-list-tpl.hbs';
 import {
-  //   mainSectionRef,
-  //   filmsListRef,
+  currentPageRef,
+  filmsListRef,
   //   renderFilms,
-  //   genres,
   pageNamberObj,
   apiKey,
   createCardFunc,
   fetchPopularMoviesList,
-  //   fetchGenres,
 } from './1initialHomePage.js';
-//const apiKey = 'fa9fa54083c479003851c965e04509d5';
 let inputValue = '';
-//let pageNumber = 1;
 let totalPages = 0;
 
 const searchFormRef = document.querySelector('.search-film');
 const searchInputRef = document.querySelector('.search-film__input');
 const btnPrevPageRef = document.querySelector('.btn-prev');
 const btnNextPageRef = document.querySelector('.btn-next');
-const currentPageRef = document.querySelector('.current-page');
+// const currentPageRef = document.querySelector('.current-page');
 const paginationRef = document.querySelector('.pagination');
-const filmListRef = document.querySelector('.js-films-list');
+// const filmsListRef = document.querySelector('.js-films-list');
 const formPageInputRef = document.querySelector('.page-input');
 
 // const searchWrapperRef = document.querySelector('.search-wrapper');
@@ -40,27 +34,25 @@ const serviceData = data => {
 };
 
 function createFilmList(data) {
-  filmListRef.innerHTML = '';
+  filmsListRef.innerHTML = '';
   data.results.forEach(element => {
-    let poster = element.poster_path;
+    let poster = element.backdrop_path; /////////////???
     createCardFunc(poster, element.title, element.id);
   });
   serviceData(data);
 }
 
 function fetchPopularMoviesListWithServices(pageNumber) {
-  filmListRef.innerHTML = '';
+  filmsListRef.innerHTML = '';
   fetchPopularMoviesList(pageNumber).then(data => {
     serviceData(data);
   });
 }
 
-function battonToggle() {
+function plaginationNavigation() {
   if (inputValue) {
     fetchFilms().then(data => {
       createFilmList(data);
-      // serviceData(data);
-      // renderMarkup(data);
     });
   } else {
     fetchPopularMoviesListWithServices(pageNamberObj.pageNumber);
@@ -68,11 +60,8 @@ function battonToggle() {
 }
 ////////////////////////
 
-// console.dir(fetchPopularMoviesList(2));
-
 function fetchFilms() {
   const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNamberObj.pageNumber}&api_key=${apiKey}`;
-  // console.log(url);
   return fetch(url)
     .then(res => res.json())
     .then(data => {
@@ -87,14 +76,14 @@ searchFormRef.addEventListener('submit', event => {
   event.preventDefault();
   inputValue = searchInputRef.value;
   pageNamberObj.pageNumber = 1;
-  filmListRef.innerHTML = '';
+  filmsListRef.innerHTML = '';
   if (inputValue) {
     fetchFilms().then(data => {
       if (data.total_pages > 1) {
         createFilmList(data);
       } else {
         let markup = `<h2 class='no-results'>По вашеме запросу ничего не найдено!</h2>`;
-        filmListRef.insertAdjacentHTML('beforeend', markup);
+        filmsListRef.insertAdjacentHTML('beforeend', markup);
         paginationRef.classList.add('is-hidden');
       }
     });
@@ -102,16 +91,6 @@ searchFormRef.addEventListener('submit', event => {
     pageNamberObj.pageNumber = 1;
     fetchPopularMoviesListWithServices(pageNamberObj.pageNumber);
   }
-});
-
-btnNextPageRef.addEventListener('click', () => {
-  pageNamberObj.pageNumber += 1;
-  battonToggle();
-});
-
-btnPrevPageRef.addEventListener('click', () => {
-  pageNamberObj.pageNumber -= 1;
-  battonToggle();
 });
 
 /////////////////////////////////////////////////////////
@@ -123,7 +102,17 @@ formPageInputRef.addEventListener('submit', event => {
     ? (pageNamberObj.pageNumber = inputPageNumber)
     : (pageNamberObj.pageNumber = totalPages);
   currentPageRef.value = '';
-  battonToggle();
+  plaginationNavigation();
 });
 
+paginationRef.addEventListener('click', event => {
+  const { target } = event;
+  if (target.id === 'btn-prev') {
+    pageNamberObj.pageNumber -= 1;
+  }
+  if (target.id === 'btn-next') {
+    pageNamberObj.pageNumber += 1;
+  }
+  plaginationNavigation();
+});
 // export { serviceData };

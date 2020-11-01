@@ -24,7 +24,6 @@ function createCardFunc(imgPath, filmTitle, movieId) {
       id: movieId,
     },
   ];
-  console.log('wer');
   filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(renderFilms));
 }
 
@@ -34,7 +33,6 @@ const fetchPopularMoviesList = (page = 1) => {
     .then(res => res.json())
     .then(data => {
       // serviceData(data);
-      console.log(data);
       data.results.forEach(element => {
         const date1 = new Date(`${element.release_date} 00:00:00`);
         createCardFunc(
@@ -58,13 +56,11 @@ const fetchGenres = () => {
     })
     .catch(error => console.log(error));
 };
-// fetchPopularMoviesList();
 
 fetchPopularMoviesList(pageNamberObj.pageNumber);
 
 fetchGenres();
 
-// filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
 export {
   filmsListRef,
   renderFilms,
@@ -74,4 +70,5 @@ export {
   createCardFunc,
   fetchPopularMoviesList,
   fetchGenres,
+  currentPageRef, /////////////Artem
 };
