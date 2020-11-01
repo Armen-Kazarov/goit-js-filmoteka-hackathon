@@ -1,5 +1,8 @@
-'use strict'
+'use strict';
 import filmsListTpl from '../templates/films-list-tpl.hbs';
+
+// import { serviceData } from './2searchAndPlaginationHomePage.js';
+const currentPageRef = document.querySelector('.current-page'); ////////////Artem
 
 const filmsListRef = document.querySelector('.js-films-list');
 
@@ -10,10 +13,11 @@ let renderFilms = [];
 let genres;
 const pageNamberObj = {
   pageNumber: 1,
+  totalPages: 0, /////////////
 };
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
 
- function createCardFunc (imgPath, filmTitle, movieId) {
+function createCardFunc(imgPath, filmTitle, movieId) {
   renderFilms = [
     {
       backdrop_path: imgPath,
@@ -22,14 +26,14 @@ const apiKey = 'fa9fa54083c479003851c965e04509d5';
     },
   ];
   filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(renderFilms));
-};
+}
 
 const fetchPopularMoviesList = (page = 1) => {
   const urlForPopularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ru-RU&page=${page}`;
-  fetch(urlForPopularMovies)
+  return fetch(urlForPopularMovies) ////////////////////Artem
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      pageNamberObj.totalPages = data.total_pages; ////////////////////Artem
       data.results.forEach(element => {
         const date1 = new Date(`${element.release_date} 00:00:00`);
         createCardFunc(
@@ -38,6 +42,8 @@ const fetchPopularMoviesList = (page = 1) => {
           element.id,
         );
       });
+      currentPageRef.setAttribute('placeholder', pageNamberObj.pageNumber); /////////Artem
+      return data; //////////////////Artem
     })
     .catch(error => console.log(error));
 };
@@ -51,14 +57,11 @@ const fetchGenres = () => {
     })
     .catch(error => console.log(error));
 };
-// fetchPopularMoviesList();
 
 fetchPopularMoviesList(pageNamberObj.pageNumber);
 
 fetchGenres();
 
-
-// filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
 export {
   filmsListRef,
   renderFilms,
@@ -68,4 +71,5 @@ export {
   createCardFunc,
   fetchPopularMoviesList,
   fetchGenres,
+  currentPageRef, /////////////Artem
 };
