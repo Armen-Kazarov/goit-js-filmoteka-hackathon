@@ -14,6 +14,7 @@ let genres;
 const pageNumberObj = {
   pageNumber: 1,
   totalPages: 0, 
+
 };
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
 
@@ -64,6 +65,7 @@ const fetchGenres = () => {
 fetchPopularMoviesList(pageNumberObj.pageNumber);
 
 fetchGenres();
+
 
 export {
   filmsListRef,
