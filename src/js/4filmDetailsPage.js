@@ -64,7 +64,7 @@ const toggleToQueue = () => {
   ) {
     toQueueArray = toQueueArray.filter(el => el.id !== selectedFilm.id);
   } else {
-    toQueueArray.push(selecedtFilm);
+    toQueueArray.push(selectedFilm);
   }
 
   localStorage.setItem('filmsQueue', JSON.stringify(toQueueArray));
