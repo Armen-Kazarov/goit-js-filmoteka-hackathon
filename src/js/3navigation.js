@@ -1,4 +1,4 @@
-import {filmsListRef, renderFilms, genres, pageNamberObj, apiKey, createCardFunc, fetchPopularMoviesList, fetchGenres} from './1initialHomePage.js';
+import {filmsListRef, renderFilms, genres, pageNumberObj, apiKey, createCardFunc, fetchPopularMoviesList, fetchGenres} from './1initialHomePage.js';
 import {showDetails} from './4filmDetailsPage';
 import {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList} from './5libraryPage.js';
 
@@ -49,26 +49,26 @@ filmsListRef.addEventListener('click', activeDetailsPage);
 function activeDetailsPage(event) {
   event.preventDefault();
   exChange.innerHTML = '';
-  if (event.target.nodeName !== "LI") {
-    return;
-  };
+  // if (event.target.nodeName !== "LI") {
+  //   return;
+  // };
 
-  let selectFilm;
-  const fetchSelectFilm = () => {
-    let movieId = event.target.getAttribute('id');
-    console.log(movieId);
+  // let selectFilm;
+  let movieId = event.target.getAttribute('id');
+  console.log(movieId);
+
+  const selectFilm = () => {
     const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
     fetch(urlForSelectFilm)
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        return data.articles;
-        // selectFilm = data.selectFilm;
+        return data;
       })
       .catch(error => console.log(error));
     };
-   
-  // showDetails(selectFilm);
+    // selectFilm();
+  showDetails(selectFilm);
 };
 
 
@@ -113,5 +113,4 @@ const selectFilms = (function () {
 })();
 
 export {
-  activeDetailsPage
-}
+  activeDetailsPage}
