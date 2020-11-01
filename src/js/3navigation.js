@@ -53,7 +53,7 @@ function activeDetailsPage(event) {
     return;
   };
 
-  // let selectFilm;
+  let selectFilm;
   const fetchSelectFilm = () => {
     let movieId = event.target.getAttribute('id');
     console.log(movieId);
@@ -63,11 +63,12 @@ function activeDetailsPage(event) {
       .then(data => {
         console.log(data);
         return data.articles;
+        // selectFilm = data.selectFilm;
       })
       .catch(error => console.log(error));
     };
-
-    //  showDetails(fetchSelectFilm);
+   
+  // showDetails(selectFilm);
 };
 
 
