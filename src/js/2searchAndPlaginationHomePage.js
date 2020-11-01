@@ -1,4 +1,5 @@
-import filmsSearchTpl from '../templates/film-searchl.hbs';
+// import filmsSearchTpl from '../templates/film-searchl.hbs';
+// import filmsListTpl from '../templates/films-list-tpl.hbs';
 import {
   //   mainSectionRef,
   //   filmsListRef,
@@ -6,8 +7,8 @@ import {
   //   genres,
   pageNumberObj,
   apiKey,
-  //   createCardFunc,
-  //   fetchPopularMoviesList,
+  createCardFunc,
+  fetchPopularMoviesList,
   //   fetchGenres,
 } from './1initialHomePage.js';
 //const apiKey = 'fa9fa54083c479003851c965e04509d5';
@@ -28,19 +29,6 @@ const formPageInputRef = document.querySelector('.page-input');
 // let markup = filmsSearchTpl();
 // console.log(markup);
 // searchWrapperRef.insertAdjacentHTML('beforeend', markup);
-
-function fetchFilms() {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNamberObj.pageNumber}&api_key=${apiKey}`;
-  console.log(url);
-  return fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      totalPages = data.total_pages;
-      currentPageRef.setAttribute('placeholder', pageNamberObj.pageNumber);
-      return data;
-    })
-    .catch('Произошла ошибка');
-}
 const serviceData = data => {
   paginationRef.classList.remove('is-hidden');
   data.page === 1
@@ -51,16 +39,59 @@ const serviceData = data => {
     : btnNextPageRef.classList.remove('is-hidden');
 };
 
+function createFilmList(data) {
+  filmListRef.innerHTML = '';
+  data.results.forEach(element => {
+    let poster = element.backdrop_path;
+    createCardFunc(poster, element.title, element.id);
+  });
+  serviceData(data);
+}
+
+function fetchPopularMoviesListWithServices(pageNumber) {
+  filmListRef.innerHTML = '';
+  fetchPopularMoviesList(pageNumber).then(data => {
+    serviceData(data);
+  });
+}
+
+function battonToggle() {
+  if (inputValue) {
+    fetchFilms().then(data => {
+      createFilmList(data);
+      // serviceData(data);
+      // renderMarkup(data);
+    });
+  } else {
+    fetchPopularMoviesListWithServices(pageNumberObj.pageNumber);
+  }
+}
+////////////////////////
+
+// console.dir(fetchPopularMoviesList(2));
+
+function fetchFilms() {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNumberObj.pageNumber}&api_key=${apiKey}`;
+  // console.log(url);
+  return fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      totalPages = data.total_pages;
+      currentPageRef.setAttribute('placeholder', pageNumberObj.pageNumber);
+      return data;
+    })
+    .catch('Произошла ошибка');
+}
+
 searchFormRef.addEventListener('submit', event => {
   event.preventDefault();
   inputValue = searchInputRef.value;
-  pageNamberObj.pageNumber = 1;
+  pageNumberObj.pageNumber = 1;
   filmListRef.innerHTML = '';
   if (inputValue) {
     fetchFilms().then(data => {
-      //   renderMarkup(data);
       if (data.total_pages > 1) {
-        serviceData(data);
+        createFilmList(data);
       } else {
         let markup = `<h2 class='no-results'>По вашеме запросу ничего не найдено!</h2>`;
         filmListRef.insertAdjacentHTML('beforeend', markup);
@@ -68,25 +99,19 @@ searchFormRef.addEventListener('submit', event => {
       }
     });
   } else {
-    paginationRef.classList.add('is-hidden');
-    // fetchPopularMoviesList();
+    pageNumberObj.pageNumber = 1;
+    fetchPopularMoviesListWithServices(pageNumberObj.pageNumber);
   }
 });
 
 btnNextPageRef.addEventListener('click', () => {
-  pageNamberObj.pageNumber += 1;
-  fetchFilms().then(data => {
-    serviceData(data);
-    // renderMarkup(data);
-  });
+  pageNumberObj.pageNumber += 1;
+  battonToggle();
 });
 
 btnPrevPageRef.addEventListener('click', () => {
-  pageNamberObj.pageNumber -= 1;
-  fetchFilms().then(data => {
-    serviceData(data);
-    // renderMarkup(data);
-  });
+  pageNumberObj.pageNumber -= 1;
+  battonToggle();
 });
 
 /////////////////////////////////////////////////////////
@@ -95,12 +120,10 @@ formPageInputRef.addEventListener('submit', event => {
   event.preventDefault();
   const inputPageNumber = Math.abs(parseInt(currentPageRef.value));
   inputPageNumber <= totalPages
-    ? (pageNamberObj.pageNumber = inputPageNumber)
-    : (pageNamberObj.pageNumber = totalPages);
+    ? (pageNumberObj.pageNumber = inputPageNumber)
+    : (pageNumberObj.pageNumber = totalPages);
   currentPageRef.value = '';
-
-  fetchFilms().then(data => {
-    serviceData(data);
-    // renderMarkup(data);
-  });
+  battonToggle();
 });
+
+// export { serviceData };

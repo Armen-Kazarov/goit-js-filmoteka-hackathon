@@ -22,12 +22,13 @@ function createCardFunc(imgPath, filmTitle, movieId, voteAverage) {
       vote_average: voteAverage,
     },
   ];
+  console.log('wer');
   filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(renderFilms));
 }
 
 const fetchPopularMoviesList = (page = 1) => {
   const urlForPopularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ru-RU&page=${page}`;
-  fetch(urlForPopularMovies)
+  return fetch(urlForPopularMovies) ////////////////////Artem
     .then(res => res.json())
     .then(data => {
       data.results.forEach(element => {
@@ -39,6 +40,8 @@ const fetchPopularMoviesList = (page = 1) => {
           element.vote_average,
         );
       });
+      currentPageRef.setAttribute('placeholder', pageNamberObj.pageNumber); /////////Artem
+      return data; //////////////////Artem
     })
     .catch(error => console.log(error));
 };
