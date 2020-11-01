@@ -2,7 +2,7 @@ import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
 import { activeDetailsPage } from './3navigation';
 const libraryListRef = document.querySelector('.js-films-list');
 
-const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
+const createLibraryCardFunc = (data) => {
   renderFilms = [
     {
       poster_path: imgPath,
@@ -11,11 +11,7 @@ const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
       evaluation: voteAverage,
     },
   ];
-  libraryListRef
-    .innerHTML(itemsLibraryTemplate(renderFilms))
-    .addEventListener('click', event =>
-      event.target(activeDetailsPage(movieId, true)),
-    );
+  libraryListRef.innerHTML(itemsLibraryTemplate(renderFilms));
 };
 
 const drawQueueFilmList = () => {
@@ -45,5 +41,9 @@ const drawWatchedFilmList = () => {
     libraryListRef.append(...watchedLibraryArr);
   }
 };
+
+libraryListRef.addEventListener('click', event =>
+  event.target(activeDetailsPage(movieId, true)),
+);
 
 export { createLibraryCardFunc, drawQueueFilmList, drawWatchedFilmList };

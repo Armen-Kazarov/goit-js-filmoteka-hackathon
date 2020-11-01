@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 import filmsListTpl from '../templates/films-list-tpl.hbs';
-
+import { activeDetailsPage } from './3navigation';
 const filmsListRef = document.querySelector('.js-films-list');
 
 filmsListRef.classList.add('films-list');
@@ -8,12 +8,12 @@ filmsListRef.classList.add('flex-container');
 
 let renderFilms = [];
 let genres;
-const pageNamberObj = {
+const pageNumberObj = {
   pageNumber: 2,
 };
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
 
- function createCardFunc (imgPath, filmTitle, movieId) {
+function createCardFunc(imgPath, filmTitle, movieId) {
   renderFilms = [
     {
       backdrop_path: imgPath,
@@ -22,7 +22,13 @@ const apiKey = 'fa9fa54083c479003851c965e04509d5';
     },
   ];
   filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(renderFilms));
-};
+  filmsListRef.addEventListener('click', event => { if (event.target.nodeName === "LI")
+  {
+    event.target(activeDetailsPage(console.log(movieId), true))
+  }}
+   
+  );
+}
 
 const fetchPopularMoviesList = (page = 1) => {
   const urlForPopularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ru-RU&page=${page}`;
@@ -53,17 +59,15 @@ const fetchGenres = () => {
 };
 // fetchPopularMoviesList();
 
-fetchPopularMoviesList(pageNamberObj.pageNumber);
+fetchPopularMoviesList(pageNumberObj.pageNumber);
 
 fetchGenres();
 
-
-// filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
 export {
   filmsListRef,
   renderFilms,
   genres,
-  pageNamberObj,
+  pageNumberObj,
   apiKey,
   createCardFunc,
   fetchPopularMoviesList,
