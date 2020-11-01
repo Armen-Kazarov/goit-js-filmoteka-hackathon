@@ -1,6 +1,6 @@
 import detailsFilms from '../templates/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-import { selectedFilm } from './navigation';
+import { selectedFilm } from './4navigation';
 
 const refs = {
   detailsPage: document.querySelector('#root-details-page'),
