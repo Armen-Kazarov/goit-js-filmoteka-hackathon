@@ -13,6 +13,7 @@ let renderFilms = [];
 let genres;
 const pageNamberObj = {
   pageNumber: 1,
+  totalPages: 0, /////////////
 };
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
 
@@ -32,7 +33,7 @@ const fetchPopularMoviesList = (page = 1) => {
   return fetch(urlForPopularMovies) ////////////////////Artem
     .then(res => res.json())
     .then(data => {
-      // serviceData(data);
+      pageNamberObj.totalPages = data.total_pages; ////////////////////Artem
       data.results.forEach(element => {
         const date1 = new Date(`${element.release_date} 00:00:00`);
         createCardFunc(

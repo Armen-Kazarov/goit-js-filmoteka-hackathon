@@ -8,7 +8,7 @@ import {
   fetchPopularMoviesList,
 } from './1initialHomePage.js';
 let inputValue = '';
-let totalPages = 0;
+// let totalPages = 0;
 
 const searchFormRef = document.querySelector('.search-film');
 const searchInputRef = document.querySelector('.search-film__input');
@@ -18,11 +18,6 @@ const btnNextPageRef = document.querySelector('.btn-next');
 const paginationRef = document.querySelector('.pagination');
 // const filmsListRef = document.querySelector('.js-films-list');
 const formPageInputRef = document.querySelector('.page-input');
-
-// const searchWrapperRef = document.querySelector('.search-wrapper');
-// let markup = filmsSearchTpl();
-// console.log(markup);
-// searchWrapperRef.insertAdjacentHTML('beforeend', markup);
 const serviceData = data => {
   paginationRef.classList.remove('is-hidden');
   data.page === 1
@@ -65,7 +60,7 @@ function fetchFilms() {
   return fetch(url)
     .then(res => res.json())
     .then(data => {
-      totalPages = data.total_pages;
+      pageNamberObj.totalPages = data.total_pages;
       currentPageRef.setAttribute('placeholder', pageNamberObj.pageNumber);
       return data;
     })
@@ -94,11 +89,13 @@ searchFormRef.addEventListener('submit', event => {
 });
 
 /////////////////////////////////////////////////////////
+console.log(formPageInputRef);
 
 formPageInputRef.addEventListener('submit', event => {
   event.preventDefault();
+  console.log('2');
   const inputPageNumber = Math.abs(parseInt(currentPageRef.value));
-  inputPageNumber <= totalPages
+  inputPageNumber <= pageNamberObj.totalPages
     ? (pageNamberObj.pageNumber = inputPageNumber)
     : (pageNamberObj.pageNumber = totalPages);
   currentPageRef.value = '';
@@ -107,12 +104,13 @@ formPageInputRef.addEventListener('submit', event => {
 
 paginationRef.addEventListener('click', event => {
   const { target } = event;
+  // console.log(target);
   if (target.id === 'btn-prev') {
     pageNamberObj.pageNumber -= 1;
+    plaginationNavigation();
   }
   if (target.id === 'btn-next') {
     pageNamberObj.pageNumber += 1;
+    plaginationNavigation();
   }
-  plaginationNavigation();
 });
-// export { serviceData };
