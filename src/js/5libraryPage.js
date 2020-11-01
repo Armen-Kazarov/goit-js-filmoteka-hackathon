@@ -4,11 +4,7 @@ const searchWrapperRef = document.querySelector('.search-wrapper');
 
 const libraryListRef = document.querySelector('.main-content');
 
-<<<<<<< HEAD
-const createLibraryBtnElements = () => {
-=======
 function createLibraryBtnElements() {
->>>>>>> 11e92312c1bbcd5ab9811414f2ad0c49720afa9c
   const formaRef = document.querySelector('.search-film');
   formaRef.classList.add('js-none');
 
