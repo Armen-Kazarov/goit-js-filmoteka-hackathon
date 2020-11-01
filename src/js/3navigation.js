@@ -1,8 +1,8 @@
 import { fetchPopularMoviesList } from './1initialHomePage.js';
-import { showDetails, drawQueueFilmList } from './4filmDetailsPage';
+import { showDetails, drawQueueFilmList } from './4filmDetailsPage.js';
 import createLibraryElements from './5libraryPage.js';
 
-let selectFilm;
+let selectedFilm = {};
 
 const exChange = document.querySelector('.js-films-list');
 
@@ -69,4 +69,4 @@ const selectFilms = (function () {
   window.addEventListener('scroll', trackScroll);
 })();
 
-export { selectFilm };
+export { activeHomePage, selectedFilm, activeDetailsPage };
