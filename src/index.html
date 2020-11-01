@@ -41,24 +41,28 @@
       </div>
       <ul class="container js-films-list"></ul>
       <div class="pagination ">
+        
         <button
           type="button"
           class="pagination__element pagination__element_button btn-prev is-hidden"
+          id="btn-prev"
         >
           Prev
         </button>
-        <form action="#" class="page-input">
+        <form action="#" class="page-input"></form>
           <input
             type="text"
             class="pagination__element pagination__element_current-page current-page"
+            id="current-page"
           />
         </form>
         <button
           type="button"
-          class="pagination__element pagination__element_button btn-next"
+          class="pagination__element pagination__element_button btn-next"  id="btn-next"
         >
           Next
         </button>
+      
       </div>
     </main>
     <footer class="footer flex-container container">

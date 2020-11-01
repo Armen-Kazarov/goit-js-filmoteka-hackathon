@@ -1,8 +1,11 @@
-import {filmsListRef, renderFilms, genres, pageNamberObj, apiKey, createCardFunc, fetchPopularMoviesList, fetchGenres} from './1initialHomePage.js';
-import {showDetails} from './4filmDetailsPage';
-import {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList} from './5libraryPage.js';
+import { fetchPopularMoviesList } from './1initialHomePage.js';
+import { showDetails } from './4filmDetailsPage';
+import {
+  drawQueueFilmList,
+  drawWatchedFilmList,
+} from './5libraryPage.js';
 
-// let selectFilm;
+let selectFilm;
 
 const exChange = document.querySelector('.js-films-list');
 
@@ -14,7 +17,6 @@ const libraryBtnRef = document.querySelector('.library__btn__wrapper');
 
 const home = document.querySelector('.home-button');
 home.addEventListener('click', activeHomePage);
-
 const hederName = document.querySelector('.logo');
 hederName.addEventListener('click', activeHomePage);
 
@@ -38,8 +40,8 @@ function activeLibraryPage() {
   const buttonQueue = document.querySelector('.js-btnQueue');
   const buttonWatched = document.querySelector('.js-btnWatched');
   buttonQueue.setAttribute('active', true);
-  // buttonQueue.addEventListener('click');
-  // buttonWatched.addEventListener('click');
+  buttonQueue.addEventListener('click');
+  buttonWatched.addEventListener('click');
 }
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
