@@ -1,40 +1,6 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
-<<<<<<< HEAD
-
-const searchWrapperRef = document.querySelector('.search-wrapper');
-
-const libraryListRef = document.querySelector('.main-content');
-
-function createLibraryBtnElements() {
-  const formaRef = document.querySelector('.search-film');
-  formaRef.classList.add('js-none');
-
-  const btnWrapper = document.createElement('div');
-  btnWrapper.classList = 'library__btn__wrapper';
-
-  const btnBox = document.createElement('div');
-  btnBox.classList = 'library__btn__box';
-
-  const btnWatched = document.createElement('button');
-  btnWatched.type = 'button';
-  btnWatched.dataset.target = 'watched';
-  btnWatched.classList = 'library__btn__item js-btnWatched';
-  btnWatched.textContent = 'Watched';
-
-  const btnQueue = document.createElement('button');
-  btnQueue.type = 'button';
-  btnQueue.dataset.target = 'queue';
-  btnQueue.classList = 'library__btn__item js-btnQueue';
-  btnQueue.textContent = 'Queue';
-
-  btnBox.append(btnWatched, btnQueue);
-  btnWrapper.append(btnBox);
-  searchWrapperRef.append(btnWrapper);
-}
-=======
 import { activeDetailsPage } from './3navigation';
 const libraryListRef = document.querySelector('.js-films-list');
->>>>>>> ccbfd2ef36327255a2bd6f5bbeaca382a07ee9dd
 
 const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   renderFilms = [
@@ -80,8 +46,4 @@ const drawWatchedFilmList = () => {
   }
 };
 
-<<<<<<< HEAD
-export {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList };
-=======
 export { createLibraryCardFunc, drawQueueFilmList, drawWatchedFilmList };
->>>>>>> ccbfd2ef36327255a2bd6f5bbeaca382a07ee9dd
