@@ -5,10 +5,10 @@ const libraryListRef = document.querySelector('.js-films-list');
 const createLibraryCardFunc = (data) => {
   renderFilms = [
     {
-      poster_path: imgPath,
-      title: filmTitle,
-      id: movieId,
-      evaluation: voteAverage,
+      poster_path: data.imgPath,
+      title: data.filmTitle,
+      id: data.movieId,
+      evaluation: data.voteAverage,
     },
   ];
   libraryListRef.innerHTML(itemsLibraryTemplate(renderFilms));
