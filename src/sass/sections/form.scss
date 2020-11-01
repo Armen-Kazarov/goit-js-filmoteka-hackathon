@@ -79,19 +79,18 @@
     font-weight: 700;
     font-family: 'Droid Sans';
     filter: drop-shadow(0px 1px 0.5px #ffffff);
-  }
 
-  &__element_button {
-    width: 95px;
-    cursor: pointer;
-  }
+    &_button {
+      width: 95px;
+      cursor: pointer;
+    }
 
-  &__element_current-page {
-    width: 48px;
-  }
-
-  &__element_current-page::placeholder {
-    text-align: center;
+    &_current-page {
+      width: 48px;
+      &::placeholder {
+        text-align: center;
+      }
+    }
   }
 }
 
@@ -115,14 +114,14 @@
       border-radius: 4px;
       font-size: 18px;
       line-height: 20px;
-    }
 
-    &__element_button {
-      width: 75px;
-    }
+      &_button {
+        width: 75px;
+      }
 
-    &__element_current-page {
-      width: 38px;
+      &_current-page {
+        width: 38px;
+      }
     }
   }
 }
