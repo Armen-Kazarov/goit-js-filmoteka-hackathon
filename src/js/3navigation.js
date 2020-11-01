@@ -44,7 +44,7 @@ function activeLibraryPage() {
   buttonWatched.addEventListener('click');
 }
 
-function activeDetailsPage(movieId) {
+function activeDetailsPage(movieId, itsLibraryFilm) {
   exChange.classList.add('hideAllLi');
   showDetails(selectFilm);
   mainRef.insertAdjacentHTML('beforeend', showDetails);
