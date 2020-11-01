@@ -24,7 +24,7 @@ function activeHomePage () {
 const library = document.querySelector('.library-button');
 library.addEventListener('click', activeLibraryPage);
 
-function activeLibraryPage () {
+function activeLibraryPage () {n
   exChange.innerHTML = '';
   createLibraryCardFunc();
   createLibraryBtnElements();
