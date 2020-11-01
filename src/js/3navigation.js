@@ -1,6 +1,6 @@
 import {fetchPopularMoviesList} from './1initialHomePage.js';
-import {showDetails, drawQueueFilmList} from './4filmDetailsPage';
-import createLibraryElements from './5libraryPage.js';
+import {showDetails} from './4filmDetailsPage';
+import {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList} from './5libraryPage.js';
 
 let selectFilm;
 
@@ -10,6 +10,7 @@ const mainRef = document.querySelector('.main');
 
 const home = document.querySelector('.home-button');
 home.addEventListener('click', activeHomePage);
+
 const hederName = document.querySelector('.logo');
 hederName.addEventListener('click', activeHomePage);
 
@@ -25,13 +26,14 @@ library.addEventListener('click', activeLibraryPage);
 
 function activeLibraryPage () {
   exChange.innerHTML = '';
-  createLibraryElements();
+  createLibraryCardFunc();
+  createLibraryBtnElements();
   drawQueueFilmList();
   const buttonQueue = document.querySelector('.js-btnQueue');
   const buttonWatched = document.querySelector('.js-btnWatched');
   buttonQueue.setAttribute('active', true);
-  buttonQueue.addEventListener('click', )
-  buttonWatched.addEventListener('click', )
+  // buttonQueue.addEventListener('click', )
+  // buttonWatched.addEventListener('click', )
 };
 
 function activeDetailsPage (movieId) {
@@ -40,11 +42,9 @@ function activeDetailsPage (movieId) {
   mainRef.insertAdjacentHTML('beforeend', showDetails);
   const detailsQueue = document.querySelector('.details__queue');
   const detailsWatched = document.querySelector('.details__watched');
-  detailsQueue.addEventListener('click', )
-  detailsWatched.addEventListener('click', )
+  // detailsQueue.addEventListener('click', )
+  // detailsWatched.addEventListener('click', )
 };
-
-
 
 const selectFilms =
 (function () {
@@ -70,5 +70,8 @@ const selectFilms =
   const goTopBtn = document.querySelector('.back_to_top');
   goTopBtn.addEventListener('click', backToTop);
   window.addEventListener('scroll', trackScroll);
-
 })();
+
+export default {
+  selectFilm
+}

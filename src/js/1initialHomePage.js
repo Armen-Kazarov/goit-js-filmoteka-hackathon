@@ -51,6 +51,7 @@ const fetchGenres = () => {
     })
     .catch(error => console.log(error));
 };
+// fetchPopularMoviesList();
 
 fetchPopularMoviesList(pageNamberObj.pageNumber);
 
@@ -58,7 +59,6 @@ fetchGenres();
 
 
 // filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
-
 export {
   filmsListRef,
   renderFilms,
@@ -69,4 +69,3 @@ export {
   fetchPopularMoviesList,
   fetchGenres,
 };
-
