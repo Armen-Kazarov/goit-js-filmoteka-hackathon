@@ -2,7 +2,7 @@ import {
   currentPageRef,
   filmsListRef,
   //   renderFilms,
-  pageNamberObj,
+  pageNumberObj,
   apiKey,
   createCardFunc,
   fetchPopularMoviesList,
@@ -50,18 +50,18 @@ function plaginationNavigation() {
       createFilmList(data);
     });
   } else {
-    fetchPopularMoviesListWithServices(pageNamberObj.pageNumber);
+    fetchPopularMoviesListWithServices(pageNumberObj.pageNumber);
   }
 }
 ////////////////////////
 
 function fetchFilms() {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNamberObj.pageNumber}&api_key=${apiKey}`;
+  const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNumberObj.pageNumber}&api_key=${apiKey}`;
   return fetch(url)
     .then(res => res.json())
     .then(data => {
-      pageNamberObj.totalPages = data.total_pages;
-      currentPageRef.setAttribute('placeholder', pageNamberObj.pageNumber);
+      pageNumberObj.totalPages = data.total_pages;
+      currentPageRef.setAttribute('placeholder', pageNumberObj.pageNumber);
       return data;
     })
     .catch('Произошла ошибка');
@@ -70,7 +70,7 @@ function fetchFilms() {
 searchFormRef.addEventListener('submit', event => {
   event.preventDefault();
   inputValue = searchInputRef.value;
-  pageNamberObj.pageNumber = 1;
+  pageNumberObj.pageNumber = 1;
   filmsListRef.innerHTML = '';
   if (inputValue) {
     fetchFilms().then(data => {
@@ -83,8 +83,8 @@ searchFormRef.addEventListener('submit', event => {
       }
     });
   } else {
-    pageNamberObj.pageNumber = 1;
-    fetchPopularMoviesListWithServices(pageNamberObj.pageNumber);
+    pageNumberObj.pageNumber = 1;
+    fetchPopularMoviesListWithServices(pageNumberObj.pageNumber);
   }
 });
 
@@ -95,9 +95,9 @@ formPageInputRef.addEventListener('submit', event => {
   event.preventDefault();
   console.log('2');
   const inputPageNumber = Math.abs(parseInt(currentPageRef.value));
-  inputPageNumber <= pageNamberObj.totalPages
-    ? (pageNamberObj.pageNumber = inputPageNumber)
-    : (pageNamberObj.pageNumber = totalPages);
+  inputPageNumber <= pageNumberObj.totalPages
+    ? (pageNumberObj.pageNumber = inputPageNumber)
+    : (pageNumberObj.pageNumber = totalPages);
   currentPageRef.value = '';
   plaginationNavigation();
 });
@@ -106,11 +106,11 @@ paginationRef.addEventListener('click', event => {
   const { target } = event;
   // console.log(target);
   if (target.id === 'btn-prev') {
-    pageNamberObj.pageNumber -= 1;
+    pageNumberObj.pageNumber -= 1;
     plaginationNavigation();
   }
   if (target.id === 'btn-next') {
-    pageNamberObj.pageNumber += 1;
+    pageNumberObj.pageNumber += 1;
     plaginationNavigation();
   }
 });

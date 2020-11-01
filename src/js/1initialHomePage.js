@@ -11,7 +11,7 @@ filmsListRef.classList.add('flex-container');
 
 let renderFilms = [];
 let genres;
-const pageNamberObj = {
+const pageNumberObj = {
   pageNumber: 1,
   totalPages: 0, /////////////
 };
@@ -33,7 +33,7 @@ const fetchPopularMoviesList = (page = 1) => {
   return fetch(urlForPopularMovies) ////////////////////Artem
     .then(res => res.json())
     .then(data => {
-      pageNamberObj.totalPages = data.total_pages; ////////////////////Artem
+      pageNumberObj.totalPages = data.total_pages; ////////////////////Artem
       data.results.forEach(element => {
         const date1 = new Date(`${element.release_date} 00:00:00`);
         createCardFunc(
@@ -42,7 +42,7 @@ const fetchPopularMoviesList = (page = 1) => {
           element.id,
         );
       });
-      currentPageRef.setAttribute('placeholder', pageNamberObj.pageNumber); /////////Artem
+      currentPageRef.setAttribute('placeholder', pageNumberObj.pageNumber); /////////Artem
       return data; //////////////////Artem
     })
     .catch(error => console.log(error));
@@ -58,7 +58,7 @@ const fetchGenres = () => {
     .catch(error => console.log(error));
 };
 
-fetchPopularMoviesList(pageNamberObj.pageNumber);
+fetchPopularMoviesList(pageNumberObj.pageNumber);
 
 fetchGenres();
 
@@ -66,7 +66,7 @@ export {
   filmsListRef,
   renderFilms,
   genres,
-  pageNamberObj,
+  pageNumberObj,
   apiKey,
   createCardFunc,
   fetchPopularMoviesList,
