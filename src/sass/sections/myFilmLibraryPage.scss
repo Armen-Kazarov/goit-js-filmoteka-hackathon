@@ -85,15 +85,19 @@
     &:active {
       background-color: $header-footer-active-elem-color;
       border-bottom: inherit;
-      
       color: $subtitles-list-hover-color;
     }
   }
 }
-.js-display__none{
+.btn__active {
+  background-color: $header-footer-active-elem-color;
+      border-bottom: inherit;
+      color: $subtitles-list-hover-color;
+}
+.js-display__none {
   display: none;
 }
-.content__warning__message{
+.content__warning__message {
   width: 100%;
   text-align: center;
   font-size: 24px;

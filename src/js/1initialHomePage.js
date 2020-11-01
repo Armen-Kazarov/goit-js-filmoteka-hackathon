@@ -40,7 +40,7 @@ const fetchPopularMoviesList = (page = 1) => {
           element.vote_average,
         );
       });
-      currentPageRef.setAttribute('placeholder', pageNamberObj.pageNumber); /////////Artem
+      currentPageRef.setAttribute('placeholder', pageNumberObj.pageNumber); /////////Artem
       return data; //////////////////Artem
     })
     .catch(error => console.log(error));
