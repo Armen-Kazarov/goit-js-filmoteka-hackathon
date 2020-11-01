@@ -46,31 +46,31 @@ function activeLibraryPage() {
 // exChange.addEventListener('click', activeDetailsPage);
 filmsListRef.addEventListener('click', activeDetailsPage);
 // filmsListRef.addEventListener('click', activeDetailsPage);
+
+
+
 function activeDetailsPage(event) {
   event.preventDefault();
   exChange.innerHTML = '';
-  // if (event.target.nodeName !== "LI") {
-  //   return;
-  // };
-
-  // let selectFilm;
+  if (event.target.nodeName !== "LI") {
+    return;
+  };
+  // let selectFilm = null;
   let movieId = event.target.getAttribute('id');
   console.log(movieId);
 
-  const selectFilm = () => {
+  const selectedFilm = () => {
     const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
     fetch(urlForSelectFilm)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        return data;
-      })
-      .catch(error => console.log(error));
-    };
-    // selectFilm();
-  showDetails(selectFilm);
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      return data;
+    });
+  };
+  selectedFilm();
 };
-
+console.log(activeDetailsPage.value);
 
 // function activeDetailsPage(movieId, bool) {
 
@@ -113,4 +113,5 @@ const selectFilms = (function () {
 })();
 
 export {
-  activeDetailsPage}
+  activeDetailsPage
+}
