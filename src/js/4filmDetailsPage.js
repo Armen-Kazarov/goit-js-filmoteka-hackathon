@@ -31,7 +31,7 @@ const monitorButtonStatusText = () => {
   }
 };
 
-const drawQueueFilmList = () => {
+const draQueueFilmList = () => {
   const toQueueArray = [];
   const movie = localStorage.getItem(
     filmsQueue.find(
@@ -88,4 +88,4 @@ const showDetails = selectFilm => {
   monitorButtonStatusText();
 };
 
-export { showDetails, drawQueueFilmList, drawWatchedFilmList };
+export { showDetails, draQueueFilmList, drawWatchedFilmList };

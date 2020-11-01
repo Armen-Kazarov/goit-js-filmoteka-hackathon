@@ -1,4 +1,5 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
+<<<<<<< HEAD
 
 const searchWrapperRef = document.querySelector('.search-wrapper');
 
@@ -30,6 +31,10 @@ function createLibraryBtnElements() {
   btnWrapper.append(btnBox);
   searchWrapperRef.append(btnWrapper);
 }
+=======
+import { activeDetailsPage } from './3navigation';
+const libraryListRef = document.querySelector('.js-films-list');
+>>>>>>> ccbfd2ef36327255a2bd6f5bbeaca382a07ee9dd
 
 const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   renderFilms = [
@@ -50,29 +55,33 @@ const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
 const drawQueueFilmList = () => {
   let queueLibraryArr;
   const localStorageData = JSON.parse(localStorage.getItem('filmsQueue'));
-  if (localStorageData.length !== 0 && localStorageData !== null) {
+  if (localStorageData === null || localStorageData.length === null) {
+    libraryListRef.innerHTML =
+      '<li class="content__warning__message">You do not have to queue movies to watch. Add them.</li>';
+  } else {
     queueLibraryArr = localStorageData.map(data => createLibraryCardFunc(data));
     libraryListRef.innerHTML = '';
     libraryListRef.append(...queueLibraryArr);
-  } else {
-    libraryListRef.innerHTML =
-      '<li class="content__warning__message">You do not have to queue movies to watch. Add them.</li>';
   }
 };
 
 const drawWatchedFilmList = () => {
   let watchedLibraryArr;
   const localStorageData = JSON.parse(localStorage.getItem('filmsWatched'));
-  if (localStorageData.length !== 0 && localStorageData !== null) {
+  if (localStorageData === null || localStorageData.length === null) {
+    libraryListRef.innerHTML =
+      '<li class="content__warning__message">You do not have watched movies. Add them.</li>';
+  } else {
     watchedLibraryArr = localStorageData.map(data =>
       createLibraryCardFunc(data),
     );
     libraryListRef.innerHTML = '';
     libraryListRef.append(...watchedLibraryArr);
-  } else {
-    libraryListRef.innerHTML =
-      '<li class="content__warning__message">You do not have watched movies. Add them.</li>';
   }
 };
 
+<<<<<<< HEAD
 export {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList };
+=======
+export { createLibraryCardFunc, drawQueueFilmList, drawWatchedFilmList };
+>>>>>>> ccbfd2ef36327255a2bd6f5bbeaca382a07ee9dd
