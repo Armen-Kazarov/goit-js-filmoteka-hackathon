@@ -1,23 +1,10 @@
-import {
-  filmsListRef,
-  renderFilms,
-  genres,
-  pageNumberObj,
-  apiKey,
-  createCardFunc,
-  fetchPopularMoviesList,
-  fetchGenres,
-} from './1initialHomePage.js';
-import { showDetails } from './4filmDetailsPage';
-import {
-  createLibraryCardFunc,
-  createLibraryBtnElements,
-  drawQueueFilmList,
-  drawWatchedFilmList,
-} from './5libraryPage.js';
+import {filmsListRef, renderFilms, genres, pageNumberObj, apiKey, createCardFunc, fetchPopularMoviesList, fetchGenres} from './1initialHomePage.js';
+import {showDetails} from './4filmDetailsPage';
+import {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList} from './5libraryPage.js';
+import filmCard from '../templates/detailsPage.hbs'
 
-// let selectFilm;
-
+let moveId = null;
+const searchRef = document.querySelector('.search-wrapper')
 const exChange = document.querySelector('.js-films-list');
 
 const mainRef = document.querySelector('.main');
@@ -61,39 +48,66 @@ function activeLibraryPage() {
 filmsListRef.addEventListener('click', activeDetailsPage);
 // filmsListRef.addEventListener('click', activeDetailsPage);
 
+
+
+function createCardFilmFunc (poster_path, original_title, release_date, vote_average,vote_count, popularity, genres, overview) {
+  const renderFilm = [
+    {
+      poster_path: poster_path,
+      original_title: original_title,
+      release_date: release_date,
+      vote_average: vote_average,
+      vote_count: vote_count,
+      popularity: popularity,
+      genres: genres,
+      overview: overview,
+    },
+
+  ];
+  filmsListRef.insertAdjacentHTML('beforeend', filmCard(renderFilm));
+};
 function activeDetailsPage(event) {
   exChange.innerHTML = '';
-  if (event.target.nodeName !== 'LI') {
+  searchRef.classList.add('js-display__none');
+  if (event.target.nodeName !== "LI") {
     return;
-  }
-  // let selectFilm = null;
-  let movieId = event.target;
-  console.dir(movieId);
+  };
 
+  let movieId = event.target.getAttribute('id');
+  console.log(movieId);
   const selectedFilm = () => {
-    const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=fa9fa54083c479003851c965e04509d5`;
+    const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
     fetch(urlForSelectFilm)
-      .then(res => res.json())
-      .then(data => console.log(data));
+    .then(res => res.json())
+    .then(data => {
+      createCardFilmFunc(
+          data.poster_path,
+          data.original_title,
+          data.release_date,
+          data.vote_average,
+          data.vote_count,
+          data.popularity,
+          data.genres,
+          data.overview
+        );
+    });
   };
   selectedFilm();
-}
-
-console.log(activeDetailsPage.value);
-
-// function activeDetailsPage(movieId, bool) {
+  const detailsQueue = document.querySelector('.details__queue');
+  const detailsWatched = document.querySelector('.details__watched');
+  detailsQueue.addEventListener('click', fetchGenres());
+  detailsWatched.addEventListener('click', showDetails(selectFilm));
+};
 
 // exChange.classList.add('hideAllLi');
 // mainRef.insertAdjacentHTML('beforeend', showDetails);
 
-// const detailsQueue = document.querySelector('.details__queue');
-// const detailsWatched = document.querySelector('.details__watched');
-// const detailsQueue = document.querySelector('.film-item');
-// const detailsWatched = document.querySelector('.details__watched');
+// function activeDetailsPage(movieId, bool) {
 
-// detailsQueue.addEventListener('click', fetchGenres());
-// detailsWatched.addEventListener('click', showDetails(selectFilm));
-// };
+  // mainRef.insertAdjacentHTML('beforeend', showDetails);
+
+  // const detailsQueue = document.querySelector('.film-item');
+  // const detailsWatched = document.querySelector('.details__watched');
 
 const selectFilms = (function () {
   const trackScroll = () => {
@@ -120,4 +134,6 @@ const selectFilms = (function () {
   window.addEventListener('scroll', trackScroll);
 })();
 
-export { activeDetailsPage };
+export {
+  activeDetailsPage
+}
