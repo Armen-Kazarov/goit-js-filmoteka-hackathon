@@ -86,7 +86,6 @@ searchFormRef.addEventListener('submit', event => {
     pageNumberObj.pageNumber = 1;
     fetchPopularMoviesListWithServices(pageNumberObj.pageNumber);
   }
-  searchInputRef.value = "" ///////Чистим содержимое импута 
 });
 
 formPageInputRef.addEventListener('submit', event => {
