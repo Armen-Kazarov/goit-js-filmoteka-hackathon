@@ -1,12 +1,16 @@
 import detailsFilms from '../templates/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-import {selectFilm} from './3navigation';
+import { activeDetailsPage } from './3navigation';
+
+// selectedFilm().then(data => {
+// console.log(data);
+// });
+
+let selectedFilm = null;
 
 const refs = {
   detailsPage: document.querySelector('#root-details-page'),
 };
-
-let selectedFilm = null;
 
 const findMoveInArray = array => {
   const findMovie = array.find(movie => movie.id === selectedFilm.id);
@@ -95,18 +99,16 @@ const toggleToWatched = () => {
 };
 
 const showDetails = selectFilm => {
-  typeof selectFilm.release_date === 'undefined' ||
-  selectFilm.release_date === ''
-    ? (selectFilm.release_date = 'unknown')
-    : (selectFilm.release_date = selectFilm.release_date.slice(0, 4));
-
-  if (typeof selectFilm.poster_path === 'object') {
-    selectFilm.poster_path = `./images/temp.png`;
-  } else {
-    selectFilm.poster_path = `https://image.tmdb.org/t/p/original${selectFilm.poster_path}`;
+  if (selectFilm.release_date) {
+    selectFilm.release_date = selectedFilm.release_date
+      .split('')
+      .splice(0, 4)
+      .join('');
   }
-  selectedFilm = selectFilm;
-  refs.detailsPage.innerHTML = detailsFilms(selectFilm);
+
+  const temp = detailsFilms(selectFilm);
+  refs.detailsPage.innerHTML = temp;
+
   monitorButtonStatusText();
 };
 

@@ -1,8 +1,9 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
 import { activeDetailsPage } from './3navigation';
 const libraryListRef = document.querySelector('.js-films-list');
-
-const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
+const queueBtnRef= document.querySelector(".js-btnQueue")
+const watchedBtnRef= document.querySelector(".js-btnWatched")
+const createLibraryCardFunc = (data) => {
   renderFilms = [
     {
       poster_path: data.imgPath,
@@ -16,6 +17,8 @@ const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
 
 const drawQueueFilmList = () => {
   let queueLibraryArr;
+  queueBtnRef.classList.add("btn__active")
+  watchedBtnRef.classList.remove("btn__active")
   const localStorageData = JSON.parse(localStorage.getItem('filmsQueue'));
   if (localStorageData === null || localStorageData.length === null) {
     libraryListRef.innerHTML =
@@ -29,6 +32,8 @@ const drawQueueFilmList = () => {
 
 const drawWatchedFilmList = () => {
   let watchedLibraryArr;
+  watchedBtnRef.classList.add("btn__active")
+  queueBtnRef.classList.remove("btn__active")
   const localStorageData = JSON.parse(localStorage.getItem('filmsWatched'));
   if (localStorageData === null || localStorageData.length === null) {
     libraryListRef.innerHTML =
@@ -41,5 +46,9 @@ const drawWatchedFilmList = () => {
     libraryListRef.append(...watchedLibraryArr);
   }
 };
+
+libraryListRef.addEventListener('click', event =>
+  event.target(activeDetailsPage(movieId, true)),
+);
 
 export { createLibraryCardFunc, drawQueueFilmList, drawWatchedFilmList };

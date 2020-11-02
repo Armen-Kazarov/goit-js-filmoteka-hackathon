@@ -34,7 +34,8 @@ const fetchPopularMoviesList = (page = 1) => {
   return fetch(urlForPopularMovies) 
     .then(res => res.json())
     .then(data => {
-      // console.log(data);
+      pageNumberObj.totalPages = data.total_pages; 
+
       data.results.forEach(element => {
         const date1 = new Date(`${element.release_date} 00:00:00`);
         createCardFunc(
@@ -65,9 +66,6 @@ fetchPopularMoviesList(pageNumberObj.pageNumber);
 
 fetchGenres();
 
-
-// filmsListRef.addEventListener('click', activeDetailsPage(movieId, false));
-
 export {
   filmsListRef,
   renderFilms,
@@ -76,6 +74,6 @@ export {
   apiKey,
   createCardFunc,
   fetchPopularMoviesList,
-  fetchGenres
+  fetchGenres,
+  currentPageRef, 
 };
-

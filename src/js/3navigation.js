@@ -1,95 +1,123 @@
-import {filmsListRef, renderFilms, genres, pageNumberObj, apiKey, createCardFunc, fetchPopularMoviesList, fetchGenres} from './1initialHomePage.js';
-import {showDetails} from './4filmDetailsPage';
-import {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList} from './5libraryPage.js';
-
-// let selectFilm;
+import {
+  filmsListRef,
+  renderFilms,
+  genres,
+  pageNumberObj,
+  apiKey,
+  createCardFunc,
+  fetchPopularMoviesList,
+  fetchGenres,
+} from './1initialHomePage.js';
+import { toggleToQueue, toggleToWatched } from './4filmDetailsPage';
+import {
+  createLibraryCardFunc,
+  createLibraryBtnElements,
+  drawQueueFilmList,
+  drawWatchedFilmList,
+} from './5libraryPage.js';
+import filmCard from '../templates/detailsPage.hbs';
 
 let moveId = null;
+
 const searchRef = document.querySelector('.search-wrapper');
 const exChange = document.querySelector('.js-films-list');
 const mainRef = document.querySelector('.main');
-
 const formaRef = document.querySelector('.search-film');
-
+const library = document.querySelector('.library-button');
 const libraryBtnRef = document.querySelector('.library__btn__wrapper');
 const libraryBtnItemRef = document.querySelector('.js-btnQueue');
 const home = document.querySelector('.home-button');
-home.addEventListener('click', activeHomePage);
-
 const hederName = document.querySelector('.logo');
 const paginationHidenRef = document.querySelector('.pagination');
 
-function activeHomePage() {
+const activeHomePage = () => {
   exChange.innerHTML = '';
+  paginationHidenRef.classList.remove('js-display__none');
   libraryBtnRef.classList.add('js-display__none');
   formaRef.classList.remove('js-display__none');
   fetchPopularMoviesList();
   //.addEventListener('click', кнопки пагинации);
   //.addEventListener('click', кнопки пагинации);
-}
+};
+home.addEventListener('click', activeHomePage);
+hederName.addEventListener('click', activeHomePage);
 
-const library = document.querySelector('.library-button');
-library.addEventListener('click', activeLibraryPage);
-
-function activeLibraryPage() {
+const activeLibraryPage = () => {
   exChange.innerHTML = '';
   formaRef.classList.add('js-display__none');
   libraryBtnRef.classList.remove('js-display__none');
+  paginationHidenRef.classList.add('js-display__none');
   drawQueueFilmList();
-  libraryBtnItemRef.classList.add('btn__active');
   const buttonQueue = document.querySelector('.js-btnQueue');
   const buttonWatched = document.querySelector('.js-btnWatched');
   buttonQueue.setAttribute('active', true);
-  // buttonQueue.addEventListener('click');
-  // buttonWatched.addEventListener('click');
-}
+  buttonQueue.addEventListener('click', drawQueueFilmList);
+  buttonWatched.addEventListener('click', drawWatchedFilmList);
+};
+library.addEventListener('click', activeLibraryPage);
 
-// exChange.addEventListener('click', activeDetailsPage);
-filmsListRef.addEventListener('click', activeDetailsPage);
-// filmsListRef.addEventListener('click', activeDetailsPage);
-function activeDetailsPage(event) {
-  event.preventDefault();
+const createCardFilmFunc = (
+  poster_path,
+  original_title,
+  release_date,
+  vote_average,
+  vote_count,
+  popularity,
+  genres,
+  overview,
+) => {
+  const renderFilm = [
+    {
+      poster_path: poster_path,
+      original_title: original_title,
+      release_date: release_date,
+      vote_average: vote_average,
+      vote_count: vote_count,
+      popularity: popularity,
+      genres: genres,
+      overview: overview,
+    },
+  ];
+  filmsListRef.insertAdjacentHTML('beforeend', filmCard(renderFilm));
+};
+
+const activeDetailsPage = event => {
+  if (event.target.nodeName !== 'LI') {
+    return;
+  }
   exChange.innerHTML = '';
-  // if (event.target.nodeName !== "LI") {
-  //   return;
-  // };
-
-  // let selectFilm;
+  formaRef.classList.add('js-display__none');
+  paginationHidenRef.classList.add('js-display__none');
   let movieId = event.target.getAttribute('id');
-  console.log(movieId);
 
-  const selectFilm = () => {
+  const selectedFilm = () => {
     const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
     fetch(urlForSelectFilm)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        return data
+        createCardFilmFunc(
+          data.poster_path,
+          data.original_title,
+          data.release_date,
+          data.vote_average,
+          data.vote_count,
+          data.popularity,
+          data.genres,
+          data.overview,
+        );
+      });
+  };
+  selectedFilm();
 
-      })
-      .catch(error => console.log(error));
-    };
- // selectFilm()
-  //showDetails(selectFilm);
-}
+  const detailsQueue = document.querySelector('.details__queue');
+  const detailsWatched = document.querySelector('.details__watched');
+  detailsQueue.addEventListener('click', toggleToQueue(selectFilm));
+  detailsWatched.addEventListener('click', toggleToWatched(selectFilm));
+};
+filmsListRef.addEventListener('click', activeDetailsPage);
 
 // const detailsQueue = document.querySelector('.film-item');
 // const detailsWatched = document.querySelector('.details__watched');
-
-// function activeDetailsPage(movieId, bool) {
-
-  // exChange.classList.add('hideAllLi');
-  // mainRef.insertAdjacentHTML('beforeend', showDetails);
-
-  // const detailsQueue = document.querySelector('.details__queue');
-  // const detailsWatched = document.querySelector('.details__watched');
-  // const detailsQueue = document.querySelector('.film-item');
-  // const detailsWatched = document.querySelector('.details__watched');
-
-  // detailsQueue.addEventListener('click', fetchGenres());
-  // detailsWatched.addEventListener('click', showDetails(selectFilm));
-// };
-
 
 const selectFilms = (function () {
   const trackScroll = () => {
@@ -116,6 +144,4 @@ const selectFilms = (function () {
   window.addEventListener('scroll', trackScroll);
 })();
 
-export {
-  activeDetailsPage,
-}
+export { activeDetailsPage };
