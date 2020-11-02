@@ -80,12 +80,12 @@ const createCardFilmFunc = (
 };
 
 const activeDetailsPage = event => {
-  exChange.innerHTML = '';
-  formaRef.classList.add('js-display__none');
+ 
   if (event.target.nodeName !== 'LI') {
     return;
   }
-
+ exChange.innerHTML = '';
+  formaRef.classList.add('js-display__none');
   let movieId = event.target.getAttribute('id');
 
   const selectedFilm = () => {
