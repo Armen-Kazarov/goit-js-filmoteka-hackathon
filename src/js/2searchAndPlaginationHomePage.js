@@ -90,7 +90,6 @@ searchFormRef.addEventListener('submit', event => {
 
 formPageInputRef.addEventListener('submit', event => {
   event.preventDefault();
-  console.log('2');
   const inputPageNumber = Math.abs(parseInt(currentPageRef.value));
   inputPageNumber <= pageNumberObj.totalPages
     ? (pageNumberObj.pageNumber = inputPageNumber)

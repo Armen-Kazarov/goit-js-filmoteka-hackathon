@@ -1,7 +1,8 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
 import { activeDetailsPage } from './3navigation';
 const libraryListRef = document.querySelector('.js-films-list');
-
+const queueBtnRef= document.querySelector(".js-btnQueue")
+const watchedBtnRef= document.querySelector(".js-btnWatched")
 const createLibraryCardFunc = (data) => {
   renderFilms = [
     {

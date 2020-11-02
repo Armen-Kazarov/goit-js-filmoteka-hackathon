@@ -27,15 +27,17 @@ const libraryBtnRef = document.querySelector('.library__btn__wrapper');
 const libraryBtnItemRef = document.querySelector('.js-btnQueue');
 const home = document.querySelector('.home-button');
 const hederName = document.querySelector('.logo');
+const paginationHidenRef = document.querySelector('.pagination');
 
 const activeHomePage = () => {
   exChange.innerHTML = '';
+  paginationHidenRef.classList.remove('js-display__none');
   libraryBtnRef.classList.add('js-display__none');
   formaRef.classList.remove('js-display__none');
   fetchPopularMoviesList();
   //.addEventListener('click', кнопки пагинации);
   //.addEventListener('click', кнопки пагинации);
-}
+};
 home.addEventListener('click', activeHomePage);
 hederName.addEventListener('click', activeHomePage);
 
@@ -51,7 +53,7 @@ const activeLibraryPage = () => {
   buttonQueue.setAttribute('active', true);
   buttonQueue.addEventListener('click', drawQueueFilmList);
   buttonWatched.addEventListener('click', drawWatchedFilmList);
-}
+};
 library.addEventListener('click', activeLibraryPage);
 
 const createCardFilmFunc = (
@@ -80,12 +82,12 @@ const createCardFilmFunc = (
 };
 
 const activeDetailsPage = event => {
- 
   if (event.target.nodeName !== 'LI') {
     return;
   }
- exChange.innerHTML = '';
+  exChange.innerHTML = '';
   formaRef.classList.add('js-display__none');
+  paginationHidenRef.classList.add('js-display__none');
   let movieId = event.target.getAttribute('id');
 
   const selectedFilm = () => {
