@@ -85,12 +85,23 @@
     &:active {
       background-color: $header-footer-active-elem-color;
       border-bottom: inherit;
+      
       color: $subtitles-list-hover-color;
     }
   }
 }
-.js-none{
+.btn__active {
+  background-color: $header-footer-active-elem-color;
+      border-bottom: inherit;
+      color: $subtitles-list-hover-color;
+}
+.js-display__none {
   display: none;
+}
+.content__warning__message {
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
 }
 @media (min-width: 768px) {
   .js-films-list {
