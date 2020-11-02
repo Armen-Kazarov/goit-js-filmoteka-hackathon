@@ -30,7 +30,7 @@ const serviceData = data => {
 function createFilmList(data) {
   filmsListRef.innerHTML = '';
   data.results.forEach(element => {
-    let poster = element.backdrop_path; /////////////???
+    let poster = element.backdrop_path;
     createCardFunc(poster, element.title, element.id);
   });
   serviceData(data);
@@ -88,12 +88,8 @@ searchFormRef.addEventListener('submit', event => {
   }
 });
 
-/////////////////////////////////////////////////////////
-console.log(formPageInputRef);
-
 formPageInputRef.addEventListener('submit', event => {
   event.preventDefault();
-  console.log('2');
   const inputPageNumber = Math.abs(parseInt(currentPageRef.value));
   inputPageNumber <= pageNumberObj.totalPages
     ? (pageNumberObj.pageNumber = inputPageNumber)
@@ -105,7 +101,6 @@ formPageInputRef.addEventListener('submit', event => {
 
 paginationRef.addEventListener('click', event => {
   const { target } = event;
-  // console.log(target);
   if (target.id === 'btn-prev') {
     pageNumberObj.pageNumber -= 1;
     plaginationNavigation();

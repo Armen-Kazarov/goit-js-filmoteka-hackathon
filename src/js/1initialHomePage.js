@@ -66,7 +66,6 @@ fetchPopularMoviesList(pageNumberObj.pageNumber);
 
 fetchGenres();
 
-
 export {
   filmsListRef,
   renderFilms,
