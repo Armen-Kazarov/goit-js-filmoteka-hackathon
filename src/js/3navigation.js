@@ -63,7 +63,7 @@ function createCardFilmFunc (poster_path, original_title, release_date, vote_ave
       overview: overview,
     },
 
-  ];
+  ];console.log(renderFilm);
   filmsListRef.insertAdjacentHTML('beforeend', filmCard(renderFilm));
 };
 function activeDetailsPage(event) {
