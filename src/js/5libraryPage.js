@@ -17,6 +17,8 @@ const createLibraryCardFunc = (data) => {
 
 const drawQueueFilmList = () => {
   let queueLibraryArr;
+  queueBtnRef.classList.add("btn__active")
+  watchedBtnRef.classList.remove("btn__active")
   const localStorageData = JSON.parse(localStorage.getItem('filmsQueue'));
   if (localStorageData === null || localStorageData.length === null) {
     libraryListRef.innerHTML =
@@ -30,6 +32,8 @@ const drawQueueFilmList = () => {
 
 const drawWatchedFilmList = () => {
   let watchedLibraryArr;
+  watchedBtnRef.classList.add("btn__active")
+  queueBtnRef.classList.remove("btn__active")
   const localStorageData = JSON.parse(localStorage.getItem('filmsWatched'));
   if (localStorageData === null || localStorageData.length === null) {
     libraryListRef.innerHTML =

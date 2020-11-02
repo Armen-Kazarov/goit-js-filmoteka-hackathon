@@ -24,7 +24,6 @@ function createCardFunc(imgPath, filmTitle, movieId) {
       backdrop_path: imgPath,
       title: filmTitle,
       id: movieId,
-      vote_average: voteAverage,
     },
   ];
   filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(renderFilms));
@@ -43,7 +42,6 @@ const fetchPopularMoviesList = (page = 1) => {
           element.backdrop_path,
           `${element.title} (${date1.getFullYear()})`,
           element.id,
-          element.vote_average,
         );
       });
 
