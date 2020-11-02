@@ -8,7 +8,7 @@ import {
   fetchPopularMoviesList,
   fetchGenres,
 } from './1initialHomePage.js';
-import { showDetails } from './4filmDetailsPage';
+import { toggleToQueue, toggleToWatched } from './4filmDetailsPage';
 import {
   createLibraryCardFunc,
   createLibraryBtnElements,
@@ -18,6 +18,7 @@ import {
 import filmCard from '../templates/detailsPage.hbs';
 
 let moveId = null;
+
 const searchRef = document.querySelector('.search-wrapper');
 const exChange = document.querySelector('.js-films-list');
 const mainRef = document.querySelector('.main');
@@ -45,9 +46,8 @@ const activeLibraryPage = () => {
   exChange.innerHTML = '';
   formaRef.classList.add('js-display__none');
   libraryBtnRef.classList.remove('js-display__none');
+  paginationHidenRef.classList.add('js-display__none');
   drawQueueFilmList();
-  libraryBtnItemRef.classList.add('btn__active');
-
   const buttonQueue = document.querySelector('.js-btnQueue');
   const buttonWatched = document.querySelector('.js-btnWatched');
   buttonQueue.setAttribute('active', true);
@@ -111,8 +111,8 @@ const activeDetailsPage = event => {
 
   const detailsQueue = document.querySelector('.details__queue');
   const detailsWatched = document.querySelector('.details__watched');
-  detailsQueue.addEventListener('click', fetchGenres());
-  detailsWatched.addEventListener('click', showDetails(selectFilm));
+  detailsQueue.addEventListener('click', toggleToQueue(selectFilm));
+  detailsWatched.addEventListener('click', toggleToWatched(selectFilm));
 };
 filmsListRef.addEventListener('click', activeDetailsPage);
 
