@@ -1,6 +1,20 @@
-import {filmsListRef, renderFilms, genres, pageNumberObj, apiKey, createCardFunc, fetchPopularMoviesList, fetchGenres} from './1initialHomePage.js';
-import {showDetails} from './4filmDetailsPage';
-import {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, drawWatchedFilmList} from './5libraryPage.js';
+import {
+  filmsListRef,
+  renderFilms,
+  genres,
+  pageNumberObj,
+  apiKey,
+  createCardFunc,
+  fetchPopularMoviesList,
+  fetchGenres,
+} from './1initialHomePage.js';
+import { showDetails } from './4filmDetailsPage';
+import {
+  createLibraryCardFunc,
+  createLibraryBtnElements,
+  drawQueueFilmList,
+  drawWatchedFilmList,
+} from './5libraryPage.js';
 
 // let selectFilm;
 
@@ -46,46 +60,40 @@ function activeLibraryPage() {
 // exChange.addEventListener('click', activeDetailsPage);
 filmsListRef.addEventListener('click', activeDetailsPage);
 // filmsListRef.addEventListener('click', activeDetailsPage);
-const selectFilm = () => {
-    const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+
+function activeDetailsPage(event) {
+  exChange.innerHTML = '';
+  if (event.target.nodeName !== 'LI') {
+    return;
+  }
+  // let selectFilm = null;
+  let movieId = event.target;
+  console.dir(movieId);
+
+  const selectedFilm = () => {
+    const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=fa9fa54083c479003851c965e04509d5`;
     fetch(urlForSelectFilm)
       .then(res => res.json())
-      .then(data => data)
-      .catch(error => console.log(error));
-    };
-    
-function activeDetailsPage(event) {
-  event.preventDefault();
-  exChange.innerHTML = '';
-  // if (event.target.nodeName !== "LI") {
-  //   return;
-  // };
+      .then(data => console.log(data));
+  };
+  selectedFilm();
+}
 
-  // let selectFilm;
-  let movieId = event.target.getAttribute('id');
-  console.log(movieId);
-
-  
-    // selectFilm();
-    console.log(sel);
-  showDetails(selectFilm);
-};
-
+console.log(activeDetailsPage.value);
 
 // function activeDetailsPage(movieId, bool) {
 
-  // exChange.classList.add('hideAllLi');
-  // mainRef.insertAdjacentHTML('beforeend', showDetails);
+// exChange.classList.add('hideAllLi');
+// mainRef.insertAdjacentHTML('beforeend', showDetails);
 
-  // const detailsQueue = document.querySelector('.details__queue');
-  // const detailsWatched = document.querySelector('.details__watched');
-  // const detailsQueue = document.querySelector('.film-item');
-  // const detailsWatched = document.querySelector('.details__watched');
+// const detailsQueue = document.querySelector('.details__queue');
+// const detailsWatched = document.querySelector('.details__watched');
+// const detailsQueue = document.querySelector('.film-item');
+// const detailsWatched = document.querySelector('.details__watched');
 
-  // detailsQueue.addEventListener('click', fetchGenres());
-  // detailsWatched.addEventListener('click', showDetails(selectFilm));
+// detailsQueue.addEventListener('click', fetchGenres());
+// detailsWatched.addEventListener('click', showDetails(selectFilm));
 // };
-
 
 const selectFilms = (function () {
   const trackScroll = () => {
@@ -112,5 +120,4 @@ const selectFilms = (function () {
   window.addEventListener('scroll', trackScroll);
 })();
 
-export {
-  activeDetailsPage}
+export { activeDetailsPage };

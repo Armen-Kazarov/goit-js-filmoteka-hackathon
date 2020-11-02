@@ -1,14 +1,16 @@
 import detailsFilms from '../templates/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-import {selectFilm} from './3navigation';
-import { data } from 'autoprefixer';
+import { activeDetailsPage } from './3navigation';
+
+// selectedFilm().then(data => {
+// console.log(data);
+// });
 
 const refs = {
   detailsPage: document.querySelector('#root-details-page'),
 };
 
-
-let selectedFilm = null;
+// let selectedFilm = null;
 
 const findMoveInArray = array => {
   const findMovie = array.find(movie => movie.id === selectedFilm.id);
