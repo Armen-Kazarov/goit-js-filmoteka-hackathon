@@ -1,5 +1,8 @@
-'use strict'
+'use strict';
 import filmsListTpl from '../templates/films-list-tpl.hbs';
+
+// import { serviceData } from './2searchAndPlaginationHomePage.js';
+const currentPageRef = document.querySelector('.current-page'); 
 
 const filmsListRef = document.querySelector('.js-films-list');
 
@@ -10,10 +13,12 @@ let renderFilms = [];
 let genres;
 const pageNumberObj = {
   pageNumber: 1,
+  totalPages: 0, 
+
 };
 const apiKey = 'fa9fa54083c479003851c965e04509d5';
 
- function createCardFunc (imgPath, filmTitle, movieId) {
+function createCardFunc(imgPath, filmTitle, movieId) {
   renderFilms = [
     {
       backdrop_path: imgPath,
@@ -22,11 +27,11 @@ const apiKey = 'fa9fa54083c479003851c965e04509d5';
     },
   ];
   filmsListRef.insertAdjacentHTML('beforeend', filmsListTpl(renderFilms));
-};
+}
 
 const fetchPopularMoviesList = (page = 1) => {
   const urlForPopularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ru-RU&page=${page}`;
-  fetch(urlForPopularMovies)
+  return fetch(urlForPopularMovies) 
     .then(res => res.json())
     .then(data => {
       // console.log(data);
@@ -38,6 +43,10 @@ const fetchPopularMoviesList = (page = 1) => {
           element.id,
         );
       });
+
+      currentPageRef.setAttribute('placeholder', pageNumberObj.pageNumber); 
+
+      return data; 
     })
     .catch(error => console.log(error));
 };
@@ -51,7 +60,6 @@ const fetchGenres = () => {
     })
     .catch(error => console.log(error));
 };
-// fetchPopularMoviesList();
 
 fetchPopularMoviesList(pageNumberObj.pageNumber);
 

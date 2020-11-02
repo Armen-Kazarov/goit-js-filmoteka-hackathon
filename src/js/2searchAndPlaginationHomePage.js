@@ -1,4 +1,3 @@
-import filmsSearchTpl from '../templates/film-searchl.hbs';
 import {
 //   mainSectionRef,
 //   filmsListRef,
@@ -12,22 +11,50 @@ import {
 } from './1initialHomePage.js'
 //const apiKey = 'fa9fa54083c479003851c965e04509d5';
 let inputValue = '';
-//let pageNumber = 1;
-let totalPages = 0;
 
 const searchFormRef = document.querySelector('.search-film');
 const searchInputRef = document.querySelector('.search-film__input');
 const btnPrevPageRef = document.querySelector('.btn-prev');
 const btnNextPageRef = document.querySelector('.btn-next');
-const currentPageRef = document.querySelector('.current-page');
+// const currentPageRef = document.querySelector('.current-page');
 const paginationRef = document.querySelector('.pagination');
-const filmListRef = document.querySelector('.js-films-list');
+// const filmsListRef = document.querySelector('.js-films-list');
 const formPageInputRef = document.querySelector('.page-input');
+const serviceData = data => {
+  paginationRef.classList.remove('is-hidden');
+  data.page === 1
+    ? btnPrevPageRef.classList.add('is-hidden')
+    : btnPrevPageRef.classList.remove('is-hidden');
+  data.page === data.total_pages
+    ? btnNextPageRef.classList.add('is-hidden')
+    : btnNextPageRef.classList.remove('is-hidden');
+};
 
-// const searchWrapperRef = document.querySelector('.search-wrapper');
-// let markup = filmsSearchTpl();
-// console.log(markup);
-// searchWrapperRef.insertAdjacentHTML('beforeend', markup);
+function createFilmList(data) {
+  filmsListRef.innerHTML = '';
+  data.results.forEach(element => {
+    let poster = element.backdrop_path;
+    createCardFunc(poster, element.title, element.id);
+  });
+  serviceData(data);
+}
+
+function fetchPopularMoviesListWithServices(pageNumber) {
+  filmsListRef.innerHTML = '';
+  fetchPopularMoviesList(pageNumber).then(data => {
+    serviceData(data);
+  });
+}
+
+function plaginationNavigation() {
+  if (inputValue) {
+    fetchFilms().then(data => {
+      createFilmList(data);
+    });
+  } else {
+    fetchPopularMoviesListWithServices(pageNumberObj.pageNumber);
+  }
+}
 
 function fetchFilms() {
   const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNumberObj.pageNumber}&api_key=${apiKey}`;
@@ -41,15 +68,6 @@ function fetchFilms() {
     })
     .catch('Произошла ошибка');
 }
-const serviceData = data => {
-  paginationRef.classList.remove('is-hidden');
-  data.page === 1
-    ? btnPrevPageRef.classList.add('is-hidden')
-    : btnPrevPageRef.classList.remove('is-hidden');
-  data.page === data.total_pages
-    ? btnNextPageRef.classList.add('is-hidden')
-    : btnNextPageRef.classList.remove('is-hidden');
-};
 
 searchFormRef.addEventListener('submit', event => {
   event.preventDefault();
@@ -58,9 +76,8 @@ searchFormRef.addEventListener('submit', event => {
   filmListRef.innerHTML = '';
   if (inputValue) {
     fetchFilms().then(data => {
-      //   renderMarkup(data);
       if (data.total_pages > 1) {
-        serviceData(data);
+        createFilmList(data);
       } else {
         let markup = `<h2 class='no-results'>По вашему запросу ничего не найдено!</h2>`;
         filmListRef.insertAdjacentHTML('beforeend', markup);
@@ -68,8 +85,8 @@ searchFormRef.addEventListener('submit', event => {
       }
     });
   } else {
-    paginationRef.classList.add('is-hidden');
-    // fetchPopularMoviesList();
+    pageNumberObj.pageNumber = 1;
+    fetchPopularMoviesListWithServices(pageNumberObj.pageNumber);
   }
 });
 
@@ -99,8 +116,19 @@ formPageInputRef.addEventListener('submit', event => {
     : (pageNumberObj.pageNumber = totalPages);
   currentPageRef.value = '';
 
-  fetchFilms().then(data => {
-    serviceData(data);
-    // renderMarkup(data);
-  });
+  currentPageRef.value = '';
+  plaginationNavigation();
+});
+
+paginationRef.addEventListener('click', event => {
+  const { target } = event;
+  if (target.id === 'btn-prev') {
+    pageNumberObj.pageNumber -= 1;
+    plaginationNavigation();
+  }
+  
+  if (target.id === 'btn-next') {
+    pageNumberObj.pageNumber += 1;
+    plaginationNavigation();
+  }
 });

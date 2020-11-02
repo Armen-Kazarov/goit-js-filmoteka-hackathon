@@ -5,17 +5,13 @@ const libraryListRef = document.querySelector('.js-films-list');
 const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   renderFilms = [
     {
-      poster_path: imgPath,
-      title: filmTitle,
-      id: movieId,
-      evaluation: voteAverage,
+      poster_path: data.imgPath,
+      title: data.filmTitle,
+      id: data.movieId,
+      evaluation: data.voteAverage,
     },
   ];
-  libraryListRef
-    .innerHTML(itemsLibraryTemplate(renderFilms))
-    .addEventListener('click', event =>
-      event.target(activeDetailsPage(movieId, true)),
-    );
+  libraryListRef.innerHTML(itemsLibraryTemplate(renderFilms));
 };
 
 const drawQueueFilmList = () => {

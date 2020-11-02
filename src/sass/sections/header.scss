@@ -5,6 +5,9 @@
   align-items: center;
   justify-content: flex-end;
 }
+.header-name {
+  display: none;
+}
 
 .logo {
   align-items: center;
@@ -13,10 +16,6 @@
   height: 21px;
   margin-left: 20px;
   cursor: pointer;
-}
-
-.heder-name {
-  display: none;
 }
 
 .nav {
@@ -32,6 +31,7 @@
   color: #4a586a;
   text-transform: uppercase;
   font: $first-font;
+<<<<<<< HEAD
 }
 
 .item:after {
@@ -53,6 +53,31 @@
 }
 .item:hover{
   color: #372c48;
+=======
+  &:after {
+    background-color: #372c48;
+    margin-top: 17px;
+    display: block;
+    content: '';
+    height: 3px;
+    width: 0%;
+    left: 50%;
+    position: absolute;
+    transition: width 0.3s ease-in-out;
+    transform: translateX(-50%);
+  }
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+    color: #372c48;
+  }
+  &:focus {
+    &:after {
+      width: 100%;
+    }
+  }
+>>>>>>> 98f7ef5814dc3011971f941328b8eb0ea598a991
 }
 
 .hideAllLi {
@@ -66,7 +91,7 @@
   .logo {
     margin-left: 34px;
   }
-  .heder-name {
+  .header-name {
     display: block;
     margin-left: 9px;
     font-size: 20px;

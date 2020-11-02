@@ -4,8 +4,9 @@ import {createLibraryCardFunc, createLibraryBtnElements, drawQueueFilmList, draw
 
 // let selectFilm;
 
+let moveId = null;
+const searchRef = document.querySelector('.search-wrapper');
 const exChange = document.querySelector('.js-films-list');
-
 const mainRef = document.querySelector('.main');
 
 const formaRef = document.querySelector('.search-film');
@@ -16,7 +17,7 @@ const home = document.querySelector('.home-button');
 home.addEventListener('click', activeHomePage);
 
 const hederName = document.querySelector('.logo');
-hederName.addEventListener('click', activeHomePage);
+const paginationHidenRef = document.querySelector('.pagination');
 
 function activeHomePage() {
   exChange.innerHTML = '';
@@ -72,6 +73,8 @@ function activeDetailsPage(event) {
   //showDetails(selectFilm);
 }
 
+// const detailsQueue = document.querySelector('.film-item');
+// const detailsWatched = document.querySelector('.details__watched');
 
 // function activeDetailsPage(movieId, bool) {
 

@@ -90,10 +90,22 @@
     }
   }
 }
+<<<<<<< HEAD
 .js-display__none{
   display: none;
 }
 .content__warning__message{
+=======
+.btn__active {
+  background-color: $header-footer-active-elem-color;
+      border-bottom: inherit;
+      color: $subtitles-list-hover-color;
+}
+.js-display__none {
+  display: none;
+}
+.content__warning__message {
+>>>>>>> 98f7ef5814dc3011971f941328b8eb0ea598a991
   width: 100%;
   text-align: center;
   font-size: 24px;
