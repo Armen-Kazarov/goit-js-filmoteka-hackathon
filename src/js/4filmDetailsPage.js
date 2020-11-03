@@ -6,7 +6,7 @@ import { activeDetailsPage } from './3navigation';
 // console.log(data);
 // });
 
-let selectedFilm = null;
+let selectedFilm = "";
 
 const refs = {
   detailsPage: document.querySelector('#root-details-page'),
@@ -18,8 +18,8 @@ const findMoveInArray = array => {
 };
 
 const monitorButtonStatusText = () => {
-  const buttonWatched = document.querySelector('.details__button-watched');
   const buttonQueue = document.querySelector('.details__button-queue');
+  const buttonWatched = document.querySelector('.details__button-watched');
 
   buttonWatched.addEventListener('click', toggleToWatched);
   buttonQueue.addEventListener('click', toggleToQueue);
@@ -76,6 +76,7 @@ const toggleToQueue = () => {
 };
 
 const toggleToWatched = () => {
+  console.log('1');
   let toWatchedArray = [];
   const moviesToWatchedFromLocalStorage = JSON.parse(
     localStorage.getItem('filmsWatched'),
@@ -112,4 +113,4 @@ const showDetails = selectFilm => {
   monitorButtonStatusText();
 };
 
-export { showDetails, toggleToQueue, toggleToWatched };
+export { showDetails, toggleToQueue, toggleToWatched, monitorButtonStatusText };
