@@ -1,5 +1,6 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
 import { activeDetailsPage } from './3navigation';
+
 const libraryListRef = document.querySelector('.js-films-list');
 const queueBtnRef= document.querySelector(".js-btnQueue")
 const watchedBtnRef= document.querySelector(".js-btnWatched")
@@ -47,8 +48,8 @@ const drawWatchedFilmList = () => {
   }
 };
 
-libraryListRef.addEventListener('click', event =>
-  event.target(activeDetailsPage(movieId, true)),
-);
+// libraryListRef.addEventListener('click', event =>
+//   event.target(activeDetailsPage(movieId, true)),
+// );
 
 export { createLibraryCardFunc, drawQueueFilmList, drawWatchedFilmList };
