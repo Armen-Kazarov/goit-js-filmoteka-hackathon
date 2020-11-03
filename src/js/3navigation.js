@@ -20,6 +20,7 @@ import {
   drawWatchedFilmList,
 } from './5libraryPage.js';
 import filmCard from '../templates/detailsPage.hbs';
+import { serviceData } from './2searchAndPlaginationHomePage.js';
 
 let moveId = null;
 const searchRef = document.querySelector('.search-wrapper');
@@ -33,6 +34,8 @@ const hederName = document.querySelector('.logo');
 const paginationHidenRef = document.querySelector('.pagination');
 
 const activeHomePage = () => {
+  pageNumberObj.pageNumber = 1; //////////////// Artem
+  pageNumberObj.inputValue = '';
   exChange.innerHTML = '';
   paginationHidenRef.classList.remove('js-display__none');
   libraryBtnRef.classList.add('js-display__none');
