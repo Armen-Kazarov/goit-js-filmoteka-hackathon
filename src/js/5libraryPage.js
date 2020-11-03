@@ -7,16 +7,16 @@ const watchedBtnRef = document.querySelector('.js-btnWatched');
 const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   renderFilms = [
     {
-      poster_path: imgPath,
-      title: filmTitle,
-      id: movieId,
-      evaluation: voteAverage,
+      poster_path: data.imgPath,
+      title: data.filmTitle,
+      id: data.movieId,
+      evaluation: data.voteAverage,
     },
   ];
   libraryListRef.innerHTML(itemsLibraryTemplate(renderFilms));
-  libraryListRef.addEventListener('click', event =>
-    event.target(activeDetailsPage(movieId, true)),
-  );
+  // libraryListRef.addEventListener('click', event =>
+  //   event.target(activeDetailsPage(movieId, true)),
+  // );
 };
 
 const drawQueueFilmList = () => {
@@ -54,5 +54,9 @@ const drawWatchedFilmList = () => {
     libraryListRef.append(...watchedLibraryArr);
   }
 };
+
+// libraryListRef.addEventListener('click', event =>
+//   event.target(activeDetailsPage(movieId, true)),
+// );
 
 export { createLibraryCardFunc, drawQueueFilmList, drawWatchedFilmList };

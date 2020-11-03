@@ -1,21 +1,20 @@
 import {
   currentPageRef,
   filmsListRef,
-  //   renderFilms,
   pageNumberObj,
   apiKey,
   createCardFunc,
   fetchPopularMoviesList,
 } from './1initialHomePage.js';
-let inputValue = '';
+// let pageNumberObj.inputValue = '';
+// const filmsListRef = document.querySelector('.js-films-list');
+// const currentPageRef = document.querySelector('.current-page');
 
 const searchFormRef = document.querySelector('.search-film');
 const searchInputRef = document.querySelector('.search-film__input');
 const btnPrevPageRef = document.querySelector('.btn-prev');
 const btnNextPageRef = document.querySelector('.btn-next');
-// const currentPageRef = document.querySelector('.current-page');
 const paginationRef = document.querySelector('.pagination');
-// const filmsListRef = document.querySelector('.js-films-list');
 const formPageInputRef = document.querySelector('.page-input');
 const serviceData = data => {
   paginationRef.classList.remove('is-hidden');
@@ -44,7 +43,7 @@ function fetchPopularMoviesListWithServices(pageNumber) {
 }
 
 function plaginationNavigation() {
-  if (inputValue) {
+  if (pageNumberObj.inputValue) {
     fetchFilms().then(data => {
       createFilmList(data);
     });
@@ -54,7 +53,7 @@ function plaginationNavigation() {
 }
 
 function fetchFilms() {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&page=${pageNumberObj.pageNumber}&api_key=${apiKey}`;
+  const url = `https://api.themoviedb.org/3/search/movie?query=${pageNumberObj.inputValue}&page=${pageNumberObj.pageNumber}&api_key=${apiKey}`;
   return fetch(url)
     .then(res => res.json())
     .then(data => {
@@ -68,11 +67,11 @@ function fetchFilms() {
 
 searchFormRef.addEventListener('submit', event => {
   event.preventDefault();
-  inputValue = searchInputRef.value;
+  pageNumberObj.inputValue = searchInputRef.value;
   pageNumberObj.pageNumber = 1;
   filmsListRef.innerHTML = '';
- 
-  if (inputValue) {
+
+  if (pageNumberObj.inputValue) {
     fetchFilms().then(data => {
       if (data.total_pages > 1) {
         createFilmList(data);
@@ -83,7 +82,7 @@ searchFormRef.addEventListener('submit', event => {
       }
     });
   } else {
-    pageNumberObj.pageNumber = 1;
+    // pageNumberObj.pageNumber = 1;
     fetchPopularMoviesListWithServices(pageNumberObj.pageNumber);
   }
 });
@@ -93,8 +92,7 @@ formPageInputRef.addEventListener('submit', event => {
   const inputPageNumber = Math.abs(parseInt(currentPageRef.value));
   inputPageNumber <= pageNumberObj.totalPages
     ? (pageNumberObj.pageNumber = inputPageNumber)
-    : (pageNumberObj.pageNumber = totalPages);
-
+    : (pageNumberObj.pageNumber = pageNumberObj.totalPages); ///////////////////!!
   currentPageRef.value = '';
   plaginationNavigation();
 });
@@ -105,9 +103,11 @@ paginationRef.addEventListener('click', event => {
     pageNumberObj.pageNumber -= 1;
     plaginationNavigation();
   }
-  
+
   if (target.id === 'btn-next') {
     pageNumberObj.pageNumber += 1;
     plaginationNavigation();
   }
 });
+
+export { serviceData };

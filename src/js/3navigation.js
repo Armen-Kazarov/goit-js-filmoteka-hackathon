@@ -38,7 +38,7 @@ const activeHomePage = () => {
   paginationHidenRef.classList.remove('js-display__none');
   libraryBtnRef.classList.add('js-display__none');
   formaRef.classList.remove('js-display__none');
-  fetchPopularMoviesList();
+  fetchPopularMoviesList().then(data => serviceData(data)); //////////////// Artem
   //.addEventListener('click', кнопки пагинации);
   //.addEventListener('click', кнопки пагинации);
 };
