@@ -46,7 +46,7 @@ const fetchPopularMoviesList = (page = 1) => {
       });
 
       currentPageRef.setAttribute('placeholder', pageNumberObj.pageNumber);
-      console.log(pageNumberObj.pageNumber);
+    
 
       return data;
     })
