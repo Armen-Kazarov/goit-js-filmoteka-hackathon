@@ -1,14 +1,12 @@
 import itemsLibraryTemplate from '../templates/itemLibraryTemplate.hbs';
-import { activeDetailsPage } from './3navigation';
+
 const libraryListRef = document.querySelector('.js-films-list');
 const queueBtnRef = document.querySelector('.js-btnQueue');
 const watchedBtnRef = document.querySelector('.js-btnWatched');
 
 const createLibraryCardFunc = data => {
   libraryListRef.innerHTML = (itemsLibraryTemplate(data));
-  // libraryListRef.addEventListener('click', event =>
-  //   event.target(activeDetailsPage(movieId, true)),
-  // );
+
 };
 
 const drawQueueFilmList = () => {
@@ -37,9 +35,5 @@ const drawWatchedFilmList = () => {
     libraryListRef.innerHTML = '';
     createLibraryCardFunc(localStorageData);}
 }; 
-
-// libraryListRef.addEventListener('click', event =>
-//   event.target(activeDetailsPage(movieId, true)),
-// );
 
 export { createLibraryCardFunc, drawQueueFilmList, drawWatchedFilmList }
