@@ -81,7 +81,6 @@ const toggleToWatched = () => {
 
 
 export {
-  //  showDetails,
   toggleToQueue,
   toggleToWatched,
   monitorButtonStatusText,

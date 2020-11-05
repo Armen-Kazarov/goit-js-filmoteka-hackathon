@@ -13,7 +13,6 @@ const filmsFromLibrary = movieId => {
 };
 const createLibraryCardFunc = data => {
 const arr = [data]
-console.log(arr);
   libraryListRef.insertAdjacentHTML("beforeend", itemsLibraryTemplate(arr));
 };
 
