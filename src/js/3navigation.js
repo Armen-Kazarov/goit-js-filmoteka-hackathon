@@ -23,6 +23,10 @@ import {
 import filmCard from '../templates/detailsPage.hbs';
 import { serviceData } from './2searchAndPlaginationHomePage.js';
 
+const selectFilm = {
+  id: '',
+};
+
 let moveId = null;
 const searchRef = document.querySelector('.search-wrapper');
 const exChange = document.querySelector('.js-films-list');
@@ -89,33 +93,33 @@ const createCardFilmFunc = (
   monitorButtonStatusText();
 };
 
+const selectedFilm = movieId => {
+  const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+  fetch(urlForSelectFilm)
+    .then(res => res.json())
+    .then(data => {
+      createCardFilmFunc(
+        data.poster_path,
+        data.original_title,
+        data.release_date,
+        data.vote_average,
+        data.vote_count,
+        data.popularity,
+        data.genres,
+        data.overview,
+      );
+    });
+};
+
 const activeDetailsPage = event => {
-  if (event.target.nodeName === 'LI') {
+  if (event.target.classList.contains('film-item')) {
     formaRef.classList.add('js-display__none');
     paginationHidenRef.classList.add('js-display__none');
-    let movieId = event.target.getAttribute('id');
-
-    const selectedFilm = () => {
-      const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
-      fetch(urlForSelectFilm)
-        .then(res => res.json())
-        .then(data => {
-          createCardFilmFunc(
-            data.poster_path,
-            data.original_title,
-            data.release_date,
-            data.vote_average,
-            data.vote_count,
-            data.popularity,
-            data.genres,
-            data.overview,
-          );
-          dataFromLibrary(data);
-        });
-    };
-    selectedFilm();
+    selectFilm.id = event.target.getAttribute('id');
+    selectedFilm(selectFilm.id);
   }
 };
+
 filmsListRef.addEventListener('click', activeDetailsPage);
 
 // const detailsQueue = document.querySelector('.film-item');
@@ -146,4 +150,4 @@ const selectFilms = (function () {
   window.addEventListener('scroll', trackScroll);
 })();
 
-export { activeDetailsPage };
+export { activeDetailsPage, selectFilm };
