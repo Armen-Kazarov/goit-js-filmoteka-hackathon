@@ -12,6 +12,7 @@ import {
   toggleToQueue,
   toggleToWatched,
   monitorButtonStatusText,
+  dataFromLibrary,
 } from './4filmDetailsPage';
 import {
   createLibraryCardFunc,
@@ -21,6 +22,10 @@ import {
 } from './5libraryPage.js';
 import filmCard from '../templates/detailsPage.hbs';
 import { serviceData } from './2searchAndPlaginationHomePage.js';
+
+const selectFilm = {
+  id: '',
+};
 
 let moveId = null;
 const searchRef = document.querySelector('.search-wrapper');
@@ -83,35 +88,37 @@ const createCardFilmFunc = (
     },
   ];
   filmsListRef.innerHTML = filmCard(renderFilm);
+
   monitorButtonStatusText();
 };
 
+const selectedFilm = movieId => {
+  const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+  fetch(urlForSelectFilm)
+    .then(res => res.json())
+    .then(data => {
+      createCardFilmFunc(
+        data.poster_path,
+        data.original_title,
+        data.release_date,
+        data.vote_average,
+        data.vote_count,
+        data.popularity,
+        data.genres,
+        data.overview,
+      );
+    });
+};
+
 const activeDetailsPage = event => {
-  if (event.target.classList.contains('film-item') === true) {
+  if (event.target.classList.contains('film-item')) {
     formaRef.classList.add('js-display__none');
     paginationHidenRef.classList.add('js-display__none');
-    let movieId = event.target.getAttribute('id');
-
-    const selectedFilm = () => {
-      const urlForSelectFilm = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
-      fetch(urlForSelectFilm)
-        .then(res => res.json())
-        .then(data => {
-          createCardFilmFunc(
-            data.poster_path,
-            data.original_title,
-            data.release_date,
-            data.vote_average,
-            data.vote_count,
-            data.popularity,
-            data.genres,
-            data.overview,
-          );
-        });
-    };
-    selectedFilm();
+    selectFilm.id = event.target.getAttribute('id');
+    selectedFilm(selectFilm.id);
   }
 };
+
 filmsListRef.addEventListener('click', activeDetailsPage);
 
 // const detailsQueue = document.querySelector('.film-item');
@@ -142,4 +149,4 @@ const selectFilms = (function () {
   window.addEventListener('scroll', trackScroll);
 })();
 
-export { activeDetailsPage };
+export { activeDetailsPage, selectFilm };
