@@ -12,6 +12,7 @@ import {
   toggleToQueue,
   toggleToWatched,
   monitorButtonStatusText,
+  dataFromLibrary,
 } from './4filmDetailsPage';
 import {
   createLibraryCardFunc,
@@ -83,11 +84,12 @@ const createCardFilmFunc = (
     },
   ];
   filmsListRef.innerHTML = filmCard(renderFilm);
+
   monitorButtonStatusText();
 };
 
 const activeDetailsPage = event => {
-  if (event.target.classList.contains('film-item') === true) {
+  if (event.target.nodeName === 'LI') {
     formaRef.classList.add('js-display__none');
     paginationHidenRef.classList.add('js-display__none');
     let movieId = event.target.getAttribute('id');
@@ -107,6 +109,7 @@ const activeDetailsPage = event => {
             data.genres,
             data.overview,
           );
+          dataFromLibrary(data);
         });
     };
     selectedFilm();
