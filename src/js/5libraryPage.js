@@ -23,9 +23,9 @@ const drawQueueFilmList = () => {
   let queueLibraryArr;
   queueBtnRef.classList.add('btn__active');
   watchedBtnRef.classList.remove('btn__active');
-  const localStorageData = localStorage.getItem("filmsQueue");
+  const localStorageData = localStorage.getItem('filmsQueue');
   console.log(localStorageData);
-  if (localStorageData === null || localStorageData.length === null) {
+  if (localStorageData || localStorageData.length) {
     libraryListRef.innerHTML =
       '<li class="content__warning__message">You do not have to queue movies to watch. Add them.</li>';
   } else {
