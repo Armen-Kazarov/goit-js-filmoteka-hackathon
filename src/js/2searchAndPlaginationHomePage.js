@@ -6,9 +6,6 @@ import {
   createCardFunc,
   fetchPopularMoviesList,
 } from './1initialHomePage.js';
-// let pageNumberObj.inputValue = '';
-// const filmsListRef = document.querySelector('.js-films-list');
-// const currentPageRef = document.querySelector('.current-page');
 
 const searchFormRef = document.querySelector('.search-film');
 const searchInputRef = document.querySelector('.search-film__input');
@@ -82,7 +79,6 @@ searchFormRef.addEventListener('submit', event => {
       }
     });
   } else {
-    // pageNumberObj.pageNumber = 1;
     fetchPopularMoviesListWithServices(pageNumberObj.pageNumber);
   }
 });
@@ -92,7 +88,7 @@ formPageInputRef.addEventListener('submit', event => {
   const inputPageNumber = Math.abs(parseInt(currentPageRef.value));
   inputPageNumber <= pageNumberObj.totalPages
     ? (pageNumberObj.pageNumber = inputPageNumber)
-    : (pageNumberObj.pageNumber = pageNumberObj.totalPages); ///////////////////!!
+    : (pageNumberObj.pageNumber = pageNumberObj.totalPages);
   currentPageRef.value = '';
   plaginationNavigation();
 });

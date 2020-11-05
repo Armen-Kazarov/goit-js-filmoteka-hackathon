@@ -2,6 +2,7 @@
 import filmsListTpl from '../templates/films-list-tpl.hbs';
 
 // import { serviceData } from './2searchAndPlaginationHomePage.js';
+
 const currentPageRef = document.querySelector('.current-page');
 
 const filmsListRef = document.querySelector('.js-films-list');
@@ -46,7 +47,6 @@ const fetchPopularMoviesList = (page = 1) => {
       });
 
       currentPageRef.setAttribute('placeholder', pageNumberObj.pageNumber);
-    
 
       return data;
     })

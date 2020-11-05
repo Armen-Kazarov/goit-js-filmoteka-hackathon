@@ -1,10 +1,5 @@
-import detailsFilms from '../templates/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-import { activeDetailsPage, selectFilm } from './3navigation';
-
-const refs = {
-  detailsPage: document.querySelector('#root-details-page'),
-};
+import { selectFilm } from './3navigation';
 
 const monitorButtonStatusText = () => {
   let filmsQueueInLocalStorage = JSON.parse(localStorage.getItem('filmsQueue'));
@@ -79,10 +74,4 @@ const toggleToWatched = () => {
   monitorButtonStatusText();
 };
 
-
-export {
-  //  showDetails,
-  toggleToQueue,
-  toggleToWatched,
-  monitorButtonStatusText,
-};
+export { monitorButtonStatusText };
