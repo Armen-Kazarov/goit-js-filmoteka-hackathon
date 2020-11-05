@@ -57,7 +57,6 @@ const activeLibraryPage = () => {
   formaRef.classList.add('js-display__none');
   libraryBtnRef.classList.remove('js-display__none');
   paginationHidenRef.classList.add('js-display__none');
-
   const buttonQueue = document.querySelector('.js-btnQueue');
   const buttonWatched = document.querySelector('.js-btnWatched');
   buttonQueue.addEventListener('click', drawQueueFilmList);
