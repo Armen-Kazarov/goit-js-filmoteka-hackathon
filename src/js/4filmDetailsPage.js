@@ -46,7 +46,6 @@ const monitorButtonStatusText = () => {
 };
 
 const fnCloseDetails = () => {
-  console.log('LOLOLOLO');
   const detailsContainerRef = document.querySelector('.details');
   formaRef.classList.remove('js-display__none');
   paginationHidenRef.classList.remove('js-display__none');
