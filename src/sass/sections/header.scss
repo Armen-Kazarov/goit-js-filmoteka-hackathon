@@ -12,10 +12,12 @@
 .logo {
   align-items: center;
   margin-right: auto;
-  width: 23px;
-  height: 21px;
   margin-left: 20px;
   cursor: pointer;
+}
+.logo__img {
+  width: 23px;
+  height: 21px;
 }
 
 .nav {
