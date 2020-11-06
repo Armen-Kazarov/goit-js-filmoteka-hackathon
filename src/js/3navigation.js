@@ -20,6 +20,7 @@ const libraryBtnRef = document.querySelector('.library__btn__wrapper');
 const home = document.querySelector('.home-button');
 const hederName = document.querySelector('.logo');
 const paginationHidenRef = document.querySelector('.pagination');
+const mainSectionref = document.querySelector('.main');
 
 const activeHomePage = () => {
   pageNumberObj.pageNumber = 1;
@@ -68,7 +69,7 @@ const createCardFilmFunc = (
       overview: overview,
     },
   ];
-  filmsListRef.innerHTML = filmCard(renderFilm);
+  mainSectionref.insertAdjacentHTML('beforeend', filmCard(renderFilm));
   monitorButtonStatusText();
 };
 
@@ -94,6 +95,7 @@ const activeDetailsPage = event => {
   if (event.target.classList.contains('film-item')) {
     formaRef.classList.add('js-display__none');
     paginationHidenRef.classList.add('js-display__none');
+    exChange.classList.add('js-display__none');
     selectFilm.id = event.target.getAttribute('id');
     selectedFilm(selectFilm.id);
   }
@@ -122,4 +124,10 @@ const goTopBtn = document.querySelector('.back_to_top');
 goTopBtn.addEventListener('click', backToTop);
 window.addEventListener('scroll', trackScroll);
 
-export { activeDetailsPage, selectFilm };
+export {
+  activeDetailsPage,
+  selectFilm,
+  formaRef,
+  exChange,
+  paginationHidenRef,
+};

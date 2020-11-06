@@ -1,7 +1,14 @@
 import 'material-design-icons/iconfont/material-icons.css';
-import { selectFilm } from './3navigation';
+import {
+  selectFilm,
+  formaRef,
+  exChange,
+  paginationHidenRef,
+} from './3navigation';
 
 const monitorButtonStatusText = () => {
+  const btnCloseDetailsRef = document.querySelector('.btn-close-details');
+
   let filmsQueueInLocalStorage = JSON.parse(localStorage.getItem('filmsQueue'));
   let filmsWatchedInLocalStorage = JSON.parse(
     localStorage.getItem('filmsWatched'),
@@ -23,6 +30,7 @@ const monitorButtonStatusText = () => {
 
   buttonWatched.addEventListener('click', toggleToWatched);
   buttonQueue.addEventListener('click', toggleToQueue);
+  btnCloseDetailsRef.addEventListener('click', fnCloseDetails);
 
   if (includesFilmQueueLS) {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Delete from queue`;
@@ -35,6 +43,15 @@ const monitorButtonStatusText = () => {
   } else {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
   }
+};
+
+const fnCloseDetails = () => {
+  console.log('LOLOLOLO');
+  const detailsContainerRef = document.querySelector('.details');
+  formaRef.classList.remove('js-display__none');
+  paginationHidenRef.classList.remove('js-display__none');
+  exChange.classList.remove('js-display__none');
+  detailsContainerRef.remove();
 };
 
 const toggleToQueue = () => {
