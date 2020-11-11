@@ -6,10 +6,16 @@
 .film-item {
   display: inline-block;
   width: 298px;
-  height: 156px;
   position: relative;
   z-index: 1;
   margin-bottom: 10px;
+  border-radius: 10px;
+  transition: 0.5s;
+  &:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px 3px #000000;
+  }
+  
 }
 
 .film-item::after {
@@ -54,7 +60,6 @@
   }
   .film-item {
     width: 346px;
-    height: 181px;
     margin-bottom: 15px;
   }
   .film-item__title {
@@ -69,7 +74,6 @@
   }
   .film-item {
     width: 466px;
-    height: 244px;
     margin-bottom: 20px;
   }
   .film-item__title {

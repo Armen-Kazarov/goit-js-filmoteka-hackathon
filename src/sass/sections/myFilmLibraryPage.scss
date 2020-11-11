@@ -1,19 +1,19 @@
 .film-item {
-    &__rating {
-      position: absolute;
-      width: 30px;
-      height: 16px;
-      background-color: $subtitles-list-hover-color;
-      border-radius: 6px;
-      top: 9px;
-      right: 7px;
-      font-family: 'Roboto Medium';
-      color: rgb(0, 0, 0);
-      line-height: 17px;
-      font-size: 10px;
-      text-align: center;
-      box-shadow: inset 0px 0px 2px rgb(0, 0, 0);
-    }
+  &__rating {
+    position: absolute;
+    width: 30px;
+    height: 16px;
+    background-color: $subtitles-list-hover-color;
+    border-radius: 6px;
+    top: 9px;
+    right: 7px;
+    font-family: 'Roboto Medium';
+    color: rgb(0, 0, 0);
+    line-height: 17px;
+    font-size: 10px;
+    text-align: center;
+    box-shadow: inset 0px 0px 2px rgb(0, 0, 0);
+  }
 }
 .library__btn {
   &__wrapper {
@@ -23,7 +23,7 @@
     background-color: rgb(243, 246, 246);
   }
   &__box {
-    max-width: 280px;
+    width: 300px;
     background-color: rgb(243, 246, 246);
     display: flex;
     justify-content: space-evenly;
@@ -34,39 +34,42 @@
     width: 140px;
     height: 38px;
     font-family: 'Roboto Medium', sans-serif;
-    background-color: rgb(243, 246, 246);
-    border: 0px;
     outline: none;
     margin: 0;
-    border-bottom: 2px solid rgb(152, 149, 162);
-    &:active {
+    border:  1px solid rgb(152, 149, 162);;
+    border-bottom: 3px solid rgb(152, 149, 162);
+    transition: 0.5s;
+    border-radius: 5px;
+    &:hover {
       background-color: $header-footer-active-elem-color;
-      border-bottom: inherit;
-      
+      box-shadow: inset 0px 0px 25px 0px rgba(255, 244, 238, 0.74);
+      transform: scale(1.1);
       color: $subtitles-list-hover-color;
     }
   }
 }
 .btn__active {
   background-color: $header-footer-active-elem-color;
-      border-bottom: inherit;
-      color: $subtitles-list-hover-color;
+  color: $subtitles-list-hover-color;
 }
 .js-display__none {
   display: none;
 }
 .content__warning__message {
   width: 100%;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
   text-align: center;
-  font-size: 24px;
+  font-size: 40px;
+  margin-top: 100px;
 }
 @media (min-width: 768px) {
   .film-item {
-      &__rating {
-        width: 38px;
-        height: 20px;
-        font-size: 14px;
-        line-height: 17px;
+    &__rating {
+      width: 38px;
+      height: 20px;
+      font-size: 14px;
+      line-height: 17px;
     }
   }
 }
@@ -75,18 +78,16 @@
     &__item {
       &:hover {
         background-color: $header-footer-active-elem-color;
-        border-bottom: inherit;
         color: $subtitles-list-hover-color;
       }
     }
   }
   .film-item {
-      &__rating {
-        width: 50px;
-        height: 27px;
-        font-size: 19px;
-        line-height: 27px;
-      }
-    
+    &__rating {
+      width: 50px;
+      height: 27px;
+      font-size: 19px;
+      line-height: 27px;
+    }
   }
 }

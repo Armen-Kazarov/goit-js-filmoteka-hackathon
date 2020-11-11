@@ -21,6 +21,19 @@ const home = document.querySelector('.home-button');
 const hederName = document.querySelector('.logo');
 const paginationHidenRef = document.querySelector('.pagination');
 
+
+const fetchGetTrailer = (movieId) => {
+  const trailerRef = document.querySelector('#trailer');
+  fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`,
+  )
+    .then(res => res.json())
+    .then(data => {
+      const trailerURL = `https://www.youtube.com/embed/${data.results[0].key}`;
+      trailerRef.setAttribute('src', trailerURL);
+    });
+};
+
 const activeHomePage = () => {
   pageNumberObj.pageNumber = 1;
   pageNumberObj.inputValue = '';
@@ -46,30 +59,11 @@ const activeLibraryPage = () => {
 };
 library.addEventListener('click', activeLibraryPage);
 
-const createCardFilmFunc = (
-  poster_path,
-  original_title,
-  release_date,
-  vote_average,
-  vote_count,
-  popularity,
-  genres,
-  overview,
-) => {
-  const renderFilm = [
-    {
-      poster_path: poster_path,
-      original_title: original_title,
-      release_date: release_date,
-      vote_average: vote_average,
-      vote_count: vote_count,
-      popularity: popularity,
-      genres: genres,
-      overview: overview,
-    },
-  ];
+const createCardFilmFunc = (data, movieId) => {
+  const renderFilm = [data];
   filmsListRef.innerHTML = filmCard(renderFilm);
   monitorButtonStatusText();
+  fetchGetTrailer(movieId)
 };
 
 const selectedFilm = movieId => {
@@ -77,18 +71,11 @@ const selectedFilm = movieId => {
   fetch(urlForSelectFilm)
     .then(res => res.json())
     .then(data => {
-      createCardFilmFunc(
-        data.poster_path,
-        data.original_title,
-        data.release_date,
-        data.vote_average,
-        data.vote_count,
-        data.popularity,
-        data.genres,
-        data.overview,
-      );
+      createCardFilmFunc(data, movieId);
     });
 };
+
+
 
 const activeDetailsPage = event => {
   if (event.target.classList.contains('film-item')) {
