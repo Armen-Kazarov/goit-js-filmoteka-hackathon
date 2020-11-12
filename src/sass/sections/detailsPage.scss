@@ -6,11 +6,18 @@
 }
 
 .details {
+  &__content-container {
+    width: 300px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding:0px 5px 30px 5px;
+    height: min-content;
+  }
 
   &__img {
-  height: 400px;
-  width: 300px;
-  margin-bottom: 20px;
+    height: 400px;
+    width: 300px;
+    margin:0 auto 20px;
   }
 
   &__title {
@@ -25,14 +32,13 @@
   }
 
   &__item {
-    width: 300px;
     display: flex;
     font: $second-font;
     font-size: 14px;
     line-height: 26px;
 
     &:nth-child(odd) {
-      background-color: rgba(119, 193, 187, 0.6);
+      background-color: rgba(119, 193, 187, 0.8);
     }
   }
 
@@ -42,7 +48,6 @@
   }
 
   &__description-item {
-
     &:not(:last-child)::after {
       content: ',';
     }
@@ -53,7 +58,7 @@
   }
 
   &__icons {
-    color: rgba(119, 193, 187, 0.6);
+    color: rgba(119, 193, 187, 0.9);
     margin-right: 6px;
   }
 
@@ -73,9 +78,10 @@
   }
 
   &__button-container {
-
+    margin-bottom: 10px;
     button {
       border: none;
+      border-radius: 5px;
       background: transparent;
       outline: none;
       cursor: pointer;
@@ -84,8 +90,19 @@
       color: rgb(55, 44, 72);
       align-items: flex-end;
       justify-content: space-between;
+     transition: 0.3s;
+      &:hover{
+        transform: scale(1.1);
+        box-shadow: inset 0px 0px 2px rgb(0, 0, 0);
+      }
     }
   }
+}
+
+#trailer {
+  width: 290px;
+  height: 185px;
+  margin: 0 auto;
 }
 
 .section__details-pag {
@@ -100,7 +117,6 @@
   }
 
   .details {
-
     &__container {
       display: flex;
     }
@@ -122,7 +138,7 @@
     }
 
     &__list {
-      margin-bottom: 46px;
+      margin-bottom: 20px;
     }
 
     &__item {
@@ -132,8 +148,16 @@
     &__description {
       width: 202px;
     }
+    &__text-about{
+      margin-bottom: 10px;
+    }
+  }
+  #trailer {
+    width: 330px;
+    height: 185px;
   }
 }
+
 
 @media screen and (min-width: 1024px) {
   .section__details-pag {
@@ -141,7 +165,6 @@
   }
 
   .details {
-
     &__img {
       width: 456px;
       min-height: 630px;
@@ -160,5 +183,9 @@
     &__description {
       width: 338px;
     }
+  }
+  #trailer {
+    width: 460px;
+    height: 260px;
   }
 }
